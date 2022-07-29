@@ -5,10 +5,14 @@ import Layout from '../layouts'
 
 import homeRoute from './home.route'
 import errorsRoute from './errors.route'
+import todosRoute from './todos.route'
 
 export default (
   <Routes>
-    <Route element={<Layout />}>{homeRoute}</Route>
+    <Route element={<Layout />}>
+      {homeRoute}
+      {todosRoute}
+    </Route>
 
     {errorsRoute}
     <Route path='*' element={<Navigate to='errors/404' />} />
