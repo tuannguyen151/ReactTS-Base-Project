@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import '../assets/css/pages/home.css'
 import reactLogo from '../assets/images/react.svg'
 
 const Home = () => {
+  const { t } = useTranslation()
   const [count, setCount] = useState(0)
 
   return (
@@ -17,6 +19,7 @@ const Home = () => {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <h2>{t('welcome')}</h2>
       <div className='card'>
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
