@@ -66,7 +66,7 @@ Declare the locale in the `src/locales` directory, then import and use it in the
 
 ---
 
-## GUIDE
+## ✍ GUIDE
 
 ### Environment variable
 
@@ -88,6 +88,10 @@ const { ENV_ENDPOINT } = import.meta.env
 console.log(ENV_ENDPOINT)
 ```
 
+## ✍ FOLDER STRUCTURE
+
+### Declare assets in the `src/assets` folder
+
 ### Declare `custom hooks` in a subfolder of `src/hooks`
 
 The `src/hooks` folder contains files to handling logic for components and pages
@@ -95,7 +99,11 @@ The `src/hooks` folder contains files to handling logic for components and pages
 **Convention:**
 
 - _Subfolder name: Feature name_
-- _In the subfolder, declare files with name: `*.hook.ts` and export functions prefixed with:`use`_
+- _In the subfolder, declare files with name: `use*.hook.ts` and export default arrow function_
+
+### Declare layout in the `src/layouts` folder
+
+### Declare locales in the `src/locales` folder
 
 ### Declare response api interface in the `src/models` folders
 
@@ -103,6 +111,22 @@ The `src/hooks` folder contains files to handling logic for components and pages
 
 - _Filename: `*.model.ts`_
 - _Export only one interface_
+
+### Declare pages in the `src/pages` folder
+
+**Convention:**
+
+- _Filename: `*.page.tsx`_
+
+### Declare routes in the `src/routes` folder
+
+File `src/routes/index.tsx`: Import public routes
+
+File `src/routes/private/index.tsx`: Import private routes (Routes just for logged in users)
+
+**Convention:**
+
+- _Filename: `*.route.tsx`_
 
 ### Declare service api in the `src/services` folder and use `RTK Query` for it
 
@@ -121,3 +145,5 @@ File `src/store/index.ts`: Import RTK slice state and servce api for `reducer` a
 
 - _Subfolder name: State name_
 - _In the subfolder, declare RTK slice state with filename: `*.slice.ts` and selector with filename: `*.selector.ts`_
+
+### Declare config for app in `src/config.ts` file
