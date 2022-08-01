@@ -19,11 +19,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
+    "async-mutex": "^0.3.2",
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.3",
+    "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {

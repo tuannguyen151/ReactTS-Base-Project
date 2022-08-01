@@ -1,4 +1,4 @@
-# 💖 React - Vite - Typescript - Husky - Commitlint - Eslint - Prettier 💖
+# 💖 React - Redux Toolkit (RTK Query) - Vite - Typescript - Husky - Commitlint - Eslint - Prettier 💖
 
 _Author:_ **TSN 💌**
 
@@ -96,3 +96,28 @@ The `src/hooks` folder contains files to handling logic for components and pages
 
 - _Subfolder name: Feature name_
 - _In the subfolder, declare files with name: `*.hook.ts` and export functions prefixed with:`use`_
+
+### Declare response api interface in the `src/models` folders
+
+**Convention:**
+
+- _Filename: `*.model.ts`_
+- _Export only one interface_
+
+### Declare service api in the `src/services` folder and use `RTK Query` for it
+
+File `src/services/base.ts`: Declare the common service api
+
+**Convention:**
+
+- _Filename: `*.service.ts`_
+- _Define and export request interface_
+
+### Declare RTK Slice State and Selector in a subfolder of `src/store`
+
+File `src/store/index.ts`: Import RTK slice state and servce api for `reducer` and `middleware` configuration
+
+**Convention:**
+
+- _Subfolder name: State name_
+- _In the subfolder, declare RTK slice state with filename: `*.slice.ts` and selector with filename: `*.selector.ts`_
