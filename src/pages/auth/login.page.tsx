@@ -1,54 +1,51 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { SubmitHandler } from 'react-hook-form'
 import { ILoginRequest, useLoginMutation } from '../../services/auth.service'
+import useValidateLoginForm from '../../hooks/login/useValidateLoginForm.hook'
 
 const Login = () => {
   const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
 
-  const [formState, setFormState] = useState<ILoginRequest>({
-    email: '',
-    password: ''
-  })
+  const [serverErrorState, setServerErrorState] = useState<string>('')
 
-  const handleChange = ({
-    target: { name, value }
-  }: React.ChangeEvent<HTMLInputElement>) =>
-    setFormState((prev) => ({ ...prev, [name]: value }))
+  const { emailRegister, passwordRegister, handleSubmit, errors } =
+    useValidateLoginForm()
 
-  const handleClick = async () => {
+  const onSubmit: SubmitHandler<ILoginRequest> = async (
+    data: ILoginRequest
+  ) => {
     try {
-      await login(formState).unwrap()
+      await login(data).unwrap()
       navigate('/')
     } catch (err: any) {
-      // eslint-disable-next-line no-console
-      console.log('rejected', err)
+      setServerErrorState(err.data.error.description)
     }
   }
 
   return (
     <>
       <div>
-        <input
-          onChange={handleChange}
-          name='email'
-          type='text'
-          placeholder='Enter Email'
-        />
+        <input {...emailRegister} type='text' placeholder='Enter Email' />
+        <br />
+        {errors.email && <span>{errors.email.message}</span>}
       </div>
       <div>
         <input
-          onChange={handleChange}
-          name='password'
+          {...passwordRegister}
           type='password'
           placeholder='Enter Password'
         />
+        <br />
+        {errors.password && <span>{errors.password.message}</span>}
       </div>
+      {serverErrorState && <div>{serverErrorState}</div>}
       <div>
         {isLoading ? (
           'Loading ...'
         ) : (
-          <button onClick={handleClick}>Login</button>
+          <button onClick={handleSubmit(onSubmit)}>Login</button>
         )}
       </div>
     </>

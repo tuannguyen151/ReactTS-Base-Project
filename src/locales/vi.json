@@ -1,4 +1,9 @@
 {
   "welcome": "Chào mừng bạn đến với React và react-i18next",
-  "errorMessages": {}
+  "email": "Địa chỉ Email",
+  "password": "Mật khẩu",
+  "errorMessages": {
+    "required": "{{field}} là bắt buộc nhập",
+    "email": "Địa chỉ Email cần chứa một ký tự '@'"
+  }
 }

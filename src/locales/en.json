@@ -1,4 +1,9 @@
 {
   "welcome": "Welcome to React and react-i18next",
-  "errorMessages": {}
+  "email": "Email Address",
+  "password": "Password",
+  "errorMessages": {
+    "required": "{{field}} is required",
+    "email": "An email address must contain a single @"
+  }
 }
