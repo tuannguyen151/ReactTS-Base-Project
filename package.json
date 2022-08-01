@@ -23,6 +23,7 @@
     "async-mutex": "^0.3.2",
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",
+    "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.3",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@types/js-cookie": "^3.0.2",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
