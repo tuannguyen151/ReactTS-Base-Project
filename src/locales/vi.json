@@ -2,6 +2,9 @@
   "welcome": "Chào mừng bạn đến với React và react-i18next",
   "email": "Địa chỉ Email",
   "password": "Mật khẩu",
+  "signIn": "Đăng nhập",
+  "rememberMe": "Ghi nhớ đăng nhập",
+  "loginPageDescription": "Đây là nội dung mô tả",
   "errorMessages": {
     "required": "{{field}} là bắt buộc nhập",
     "email": "Địa chỉ Email cần chứa một ký tự '@'"

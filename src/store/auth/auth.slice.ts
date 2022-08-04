@@ -15,10 +15,16 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLogin: (state, { payload }: PayloadAction<IAuth>) => {
+    setLogin: (
+      state,
+      { payload }: PayloadAction<IAuth & { remember_me: boolean }>
+    ) => {
       state.token = payload.token
 
-      if (payload.token) Cookies.set('token', payload.token)
+      if (payload.token)
+        Cookies.set('token', payload.token, {
+          expires: payload.remember_me ? 30 : undefined
+        })
     },
     setLogout: (state) => {
       state.token = null

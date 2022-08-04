@@ -11,6 +11,7 @@ import { ILoginRequest } from '../../services/auth.service'
 export default (): {
   emailRegister: UseFormRegisterReturn<'email'>
   passwordRegister: UseFormRegisterReturn<'password'>
+  rememberMeRegister: UseFormRegisterReturn<'remember_me'>
   handleSubmit: UseFormHandleSubmit<ILoginRequest>
   errors: FieldErrorsImpl<DeepRequired<ILoginRequest>>
 } => {
@@ -30,9 +31,12 @@ export default (): {
     required: t('errorMessages.required', { field: t('password') })
   })
 
+  const rememberMeRegister = register('remember_me')
+
   return {
     emailRegister,
     passwordRegister,
+    rememberMeRegister,
     handleSubmit,
     errors
   }

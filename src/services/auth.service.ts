@@ -6,6 +6,7 @@ import { setLogin } from '../store/auth/auth.slice'
 export interface ILoginRequest {
   email: string
   password: string
+  remember_me: boolean
 }
 
 export const authApi = createApi({
@@ -23,7 +24,7 @@ export const authApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
-          dispatch(setLogin(data))
+          dispatch(setLogin({ ...data, remember_me: args.remember_me }))
           // eslint-disable-next-line no-empty
         } catch (err) {}
       }
