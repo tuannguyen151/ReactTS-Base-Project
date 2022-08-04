@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import '../assets/css/pages/home.css'
 import reactLogo from '../assets/images/react.svg'
 
 const Home = () => {
