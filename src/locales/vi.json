@@ -5,6 +5,15 @@
   "signIn": "Đăng nhập",
   "rememberMe": "Ghi nhớ đăng nhập",
   "loginPageDescription": "Đây là nội dung mô tả",
+  "shoppingCart": "Giỏ hàng",
+  "checkout": "Thanh toán",
+  "productNumber": "{{number}} sản phẩm",
+  "product": {
+    "color": "Màu",
+    "size": "Kích cỡ",
+    "quantity": "Số lượng",
+    "price": "Giá"
+  },
   "errorMessages": {
     "required": "{{field}} là bắt buộc nhập",
     "email": "Địa chỉ Email cần chứa một ký tự '@'"

@@ -5,6 +5,15 @@
   "signIn": "Sign in",
   "rememberMe": "Remember me",
   "loginPageDescription": "Description",
+  "shoppingCart": "Shopping Cart",
+  "checkout": "Checkout",
+  "productNumber": "{{number}} products",
+  "product": {
+    "color": "Color",
+    "size": "Size",
+    "quantity": "Quantity",
+    "price": "Price"
+  },
   "errorMessages": {
     "required": "{{field}} is required",
     "email": "An email address must contain a single @"

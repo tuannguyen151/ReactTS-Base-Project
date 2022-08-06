@@ -22,7 +22,13 @@ export default () => {
         palette: {
           mode,
           ...(mode === 'light'
-            ? {}
+            ? {
+                primary: {
+                  main: '#A6E3E9',
+                  light: '#CBF1F5',
+                  dark: '#71C9CE'
+                }
+              }
             : {
                 background: {
                   default: '#041C32',
