@@ -3,10 +3,26 @@ import { useTranslation } from 'react-i18next'
 
 import '../assets/css/pages/home.css'
 import reactLogo from '../assets/images/react.svg'
+import {
+  useCreateTodoMutation,
+  useGetListTodosQuery
+} from '../sockets/todos.socket'
+
+// const socket = io('http://localhost:3000/v1/todos')
+// socket.auth = {
+//   token:
+//     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNjYxMTUyNDUwLCJleHAiOjE2NjM3NDQ0NTB9.kzP41-rp6W6ViZop5gwgfuSRSLD2HuLyo9l8ZOA16MY1'
+// }
 
 const Home = () => {
   const { t } = useTranslation()
   const [count, setCount] = useState(0)
+
+  const { data: listTodos } = useGetListTodosQuery()
+  console.log('🚀 ~ file: home.page.tsx ~ listTodos', listTodos)
+
+  const [createTodo, { error }] = useCreateTodoMutation()
+  console.log('🚀 ~ file: home.page.tsx ~ error', error)
 
   return (
     <div className='Home'>
@@ -21,7 +37,12 @@ const Home = () => {
       <h1>Vite + React</h1>
       <h2>{t('welcome')}</h2>
       <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button
+          onClick={() => {
+            setCount((count) => count + 1)
+            createTodo({ id: count })
+          }}
+        >
           count is {count}
         </button>
         <p>
