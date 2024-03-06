@@ -1,0 +1,108 @@
+{
+  "welcome": "アプリへようこそ!",
+  "Login": "ログ イン!",
+  "button_edit": "編集",
+  "song_manager": "Song name管理画面",
+  "song_title": "曲名",
+  "youtuber_name": "Youtuber名",
+  "rate_of_return": "収益率",
+  "revenue": "収益(推定)",
+  "save_change": "変更を保存",
+  "song_detail": "編集画面Song name",
+  "song_new": "楽曲新規登録",
+  "registration": "登録",
+  "upload_button": "アップロードボタン",
+  "terms_of_service": "利用規約",
+  "agree_with": "に同意する",
+  "status_yes": "あり",
+  "status_no": "なし",
+  "save": "変更",
+  "edit_private_user_information": "非公開ユーザー情報編集",
+  "edit_public_user_information": "公開ユーザー情報編集",
+  "detail_youtuber": "Youtuber名",
+  "song_list": "楽曲一覧",
+  "artist_list": "アーティスト一覧",
+  "youtuber_list": "Youtuber一覧",
+  "song": {
+    "id": "コンテンツID",
+    "source": "音源",
+    "revenue": "収益シェア率",
+    "genre": "ジャンル",
+    "introduction": "楽曲紹介",
+    "status": "ステータス",
+    "status_text": {
+      "private": "非公開",
+      "release": "公開"
+    },
+    "contains_violent_and_explicit": "暴力的な単語・露骨な表現が含まれている",
+    "vocals_with_lyrics": "歌詞付きのボーカル",
+    "isrc_code": "ISRCコード"
+  },
+  "artist": {
+    "my_page": {
+      "title": "My Page",
+      "public_user_information": "公開ユーザー情報",
+      "editor": "編集",
+      "name": "名前",
+      "bio": "Bio",
+      "basic_information": "Basic Information",
+      "address_information": "Address",
+      "transfer_information": "Transfer Information",
+      "datetime": "生年月日",
+      "phone": "電話番号",
+      "mail": "メールアドレス",
+      "postal_code": "郵便番号",
+      "province": "都道府県",
+      "resident": "住所",
+      "revenue_month": "今月の収益(推定)",
+      "title_table": "登録楽曲",
+      "title_button_song": "新規登録"
+    },
+    "name": "アーティスト名",
+    "domestic_use": "国内向け",
+    "name_kana": "カナ",
+    "overseas": "海外向け",
+    "explicit": "暴力的な単語・露骨な表現が含まれている(Explicit)",
+    "vocals_with_lyrics": "歌詞付きのボーカル",
+    "copyright_management": "著作権管理",
+    "self_management": "自己管理",
+    "copyright_management_company": "著作権管理事業者",
+    "lyricist": "作詞者",
+    "composer": "作曲者",
+    "demonstrator": "実演者",
+    "isrc_code": "ISRCコード"
+  },
+  "login": {
+    "current_password": "現在のパスワード",
+    "new_password": "新しいパスワード",
+    "new_password_confirm": "新しいパスワード(確認)"
+  },
+  "admin": {
+    "song_list": "楽曲一覧",
+    "artist_list": "アーティスト一覧",
+    "youtuber_list": "Youtuber一覧"
+  },
+  "person": {
+    "name": "名前",
+    "date_of_birth": "生年月日",
+    "telephone_number": "電話番号",
+    "email_address": "メールアドレス",
+    "post_code": "郵便番号",
+    "prefectures": "都道府県",
+    "address": "住所",
+    "bank_code": "銀行コード",
+    "branch_name": "銀行コード",
+    "account_type": "口座種目",
+    "account_holder": "口座名義",
+    "account_number": "口座番号"
+  },
+  "download": "ダウンロード",
+  "register_content_Id": "コンテンツIDを登録する",
+  "register": "登録する",
+
+  "validation": {
+    "required": "は、必ず指定してください。",
+    "number": "には、数字を指定してください。",
+    "string": "このフィールドには、文字を指定してください。"
+  }
+}

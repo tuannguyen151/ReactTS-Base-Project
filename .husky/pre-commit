@@ -1,0 +1,15 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Check tsconfig standards
+echo "✨ TypeScript check"
+npx tsc --pretty --noEmit ||
+(
+    echo "🔨❌ Failed Type check. 🔨❌";
+    echo "Are you seriously trying to write that? Make the changes required above."
+
+    false;
+)
+echo '🎉 No error found: committing this now.... ✨🚀🏄‍♂️🍻'
+
+npx lint-staged
