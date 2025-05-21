@@ -1,1 +1,8 @@
-{}
+{
+  "email": "Email",
+  "password": "Password",
+  "errorMessages": {
+    "required": "This {{field}} is required.",
+    "email": "Please enter a valid email address."
+  }
+}

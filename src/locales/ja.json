@@ -1,1 +1,8 @@
-{}
+{
+  "email": "メールアドレス",
+  "password": "パスワード",
+  "errorMessages": {
+    "required": "この{{field}}は必須です。",
+    "email": "有効なメールアドレスを入力してください。"
+  }
+}
