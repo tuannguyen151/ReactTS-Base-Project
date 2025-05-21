@@ -14,6 +14,6 @@ export default (
 
     {errorsRoute}
     {privateRoutes}
-    <Route path='*' element={<Navigate to='errors/404' />} />
+    <Route path='*' element={<Navigate to='/errors/404' />} />
   </Routes>
 ) as ReactElement
