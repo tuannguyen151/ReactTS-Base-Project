@@ -1,6 +1,14 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import {
+  type TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+} from 'react-redux'
 
-import { Middleware, combineReducers, configureStore } from '@reduxjs/toolkit'
+import {
+  type Middleware,
+  combineReducers,
+  configureStore,
+} from '@reduxjs/toolkit'
 
 import { authApi } from '../services/auth.service'
 import authSlice from './auth/auth.slice'

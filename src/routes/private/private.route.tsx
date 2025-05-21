@@ -1,4 +1,4 @@
-import { ReactElement, Suspense, lazy } from 'react'
+import { type ReactElement, Suspense, lazy } from 'react'
 import { Route } from 'react-router-dom'
 
 const Private = lazy(() => import('../../pages/private.page'))

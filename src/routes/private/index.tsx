@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { type ReactElement } from 'react'
 import { Navigate, Outlet, Route } from 'react-router-dom'
 
 import Cookies from 'js-cookie'

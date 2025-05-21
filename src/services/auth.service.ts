@@ -1,10 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 
-import IAuth from '../models/auth.model'
+import type Auth from '../models/auth.model'
 import { setLogin } from '../store/auth/auth.slice'
 import customFetchBase from './base'
 
-export interface ILoginRequest {
+export interface LoginRequest {
   email: string
   password: string
 }
@@ -14,14 +14,14 @@ export const authApi = createApi({
   baseQuery: customFetchBase,
   tagTypes: ['auth'],
   endpoints: (builder) => ({
-    login: builder.mutation<IAuth, ILoginRequest>({
-      query: (body: ILoginRequest) => ({
+    login: builder.mutation<Auth, LoginRequest>({
+      query: (body: LoginRequest) => ({
         url: 'auth/login',
         method: 'POST',
         body: body,
       }),
-      transformResponse: (result: { data: IAuth }) => result.data,
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      transformResponse: (result: { data: Auth }) => result.data,
+      async onQueryStarted(_args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
           dispatch(setLogin(data))

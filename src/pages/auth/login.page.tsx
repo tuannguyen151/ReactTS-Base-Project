@@ -1,9 +1,12 @@
 import { useState } from 'react'
-import { SubmitHandler } from 'react-hook-form'
+import { type SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import useValidateLoginForm from '../../hooks/login/useValidateLoginForm.hook'
-import { ILoginRequest, useLoginMutation } from '../../services/auth.service'
+import {
+  type LoginRequest,
+  useLoginMutation,
+} from '../../services/auth.service'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -14,9 +17,7 @@ const Login = () => {
   const { emailRegister, passwordRegister, handleSubmit, errors } =
     useValidateLoginForm()
 
-  const onSubmit: SubmitHandler<ILoginRequest> = async (
-    data: ILoginRequest,
-  ) => {
+  const onSubmit: SubmitHandler<LoginRequest> = async (data: LoginRequest) => {
     try {
       await login(data).unwrap()
       navigate('/')

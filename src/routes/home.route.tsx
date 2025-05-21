@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { type ReactElement } from 'react'
 import { Route } from 'react-router-dom'
 
 import Home from '../pages/home.page'

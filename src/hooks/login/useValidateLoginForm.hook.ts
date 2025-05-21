@@ -1,26 +1,26 @@
 import {
-  DeepRequired,
-  FieldErrorsImpl,
-  UseFormHandleSubmit,
-  UseFormRegisterReturn,
+  type DeepRequired,
+  type FieldErrorsImpl,
+  type UseFormHandleSubmit,
+  type UseFormRegisterReturn,
   useForm,
 } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { ILoginRequest } from '../../services/auth.service'
+import type { LoginRequest } from '../../services/auth.service'
 
 export default (): {
   emailRegister: UseFormRegisterReturn<'email'>
   passwordRegister: UseFormRegisterReturn<'password'>
-  handleSubmit: UseFormHandleSubmit<ILoginRequest>
-  errors: FieldErrorsImpl<DeepRequired<ILoginRequest>>
+  handleSubmit: UseFormHandleSubmit<LoginRequest>
+  errors: FieldErrorsImpl<DeepRequired<LoginRequest>>
 } => {
   const { t } = useTranslation()
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginRequest>({ mode: 'all' })
+  } = useForm<LoginRequest>({ mode: 'all' })
 
   const emailRegister = register('email', {
     required: t('errorMessages.required', { field: t('email') }),

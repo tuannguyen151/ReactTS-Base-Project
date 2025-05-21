@@ -1,3 +1,3 @@
-export default interface IAuth {
+export default interface Auth {
   token: string
 }

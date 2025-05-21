@@ -1,13 +1,13 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
 
-import IAuth from '../../models/auth.model'
+import type Auth from '../../models/auth.model'
 
-interface IAuthState {
+interface AuthState {
   token: string | null
 }
 
-const initialState: IAuthState = {
+const initialState: AuthState = {
   token: null,
 }
 
@@ -15,7 +15,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLogin: (state, { payload }: PayloadAction<IAuth>) => {
+    setLogin: (state, { payload }: PayloadAction<Auth>) => {
       state.token = payload.token
 
       if (payload.token) Cookies.set('token', payload.token)

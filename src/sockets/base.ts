@@ -1,11 +1,11 @@
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
+import type { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
 import { Socket, io } from 'socket.io-client'
 
 import config from '../config'
 import { setLogout } from '../store/auth/auth.slice'
 
-interface ICommonResponse {
+interface CommonResponse {
   data: unknown
   error: {
     type: string
@@ -13,9 +13,9 @@ interface ICommonResponse {
   }
 }
 
-type ISocketData = unknown
+type SocketDataType = unknown
 
-interface ISocketError {
+interface SocketError {
   type: string
   description: string
 }
@@ -24,15 +24,15 @@ const { ENV_ENDPOINT_SOCKET } = import.meta.env
 
 const listSocketClient: { [key: string]: SocketClient } = {}
 
-export interface ISocketClient {
+interface SocketClientInterface {
   socket: Socket
   events: string[]
 
-  emit(event: string, arg: unknown): Promise<ISocketData>
+  emit(event: string, arg: unknown): Promise<SocketDataType>
 
   on(
     event: string,
-    callback: (data: ISocketData, error?: ISocketError) => void,
+    callback: (data: SocketDataType, error?: SocketError) => void,
   ): void
 
   off(event: string): void
@@ -42,14 +42,14 @@ export interface ISocketClient {
   disconnect(): void
 }
 
-export class SocketClient implements ISocketClient {
+export class SocketClient implements SocketClientInterface {
   socket: Socket
   events: string[]
 
   constructor(endpoint: string) {
     this.events = []
 
-    if (endpoint[0] === '/') endpoint = endpoint.substring(1)
+    if (endpoint.startsWith('/')) endpoint = endpoint.substring(1)
 
     this.socket = io(ENV_ENDPOINT_SOCKET + '/' + endpoint, {
       withCredentials: true,
@@ -60,8 +60,8 @@ export class SocketClient implements ISocketClient {
   }
 
   emit(event: string, arg: unknown) {
-    return new Promise<ISocketData>((resolve, reject) => {
-      this.socket.emit(event, arg, (response: ICommonResponse) => {
+    return new Promise<SocketDataType>((resolve, reject) => {
+      this.socket.emit(event, arg, (response: CommonResponse) => {
         if (response.data) return resolve(response.data)
 
         reject(response.error)
@@ -71,11 +71,11 @@ export class SocketClient implements ISocketClient {
 
   on(
     event: string,
-    callback: (data: ISocketData, error?: ISocketError) => void,
+    callback: (data: SocketDataType, error?: SocketError) => void,
   ) {
     this.events.push(event)
 
-    this.socket.on(event, (response: ICommonResponse) => {
+    this.socket.on(event, (response: CommonResponse) => {
       if (response.data) callback(response.data)
       else callback(null, response.error)
     })
@@ -118,7 +118,9 @@ export const handleConnectError = (
   })
 }
 
-export default function fetchSocketClient(endpoint: string): ISocketClient {
+export default function fetchSocketClient(
+  endpoint: string,
+): SocketClientInterface {
   let socketClient = listSocketClient[endpoint]
 
   if (!socketClient) {
