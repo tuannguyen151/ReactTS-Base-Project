@@ -14,7 +14,7 @@ const outlineVariantClass =
 const roundedFullVariantClass = 'p-3.5'
 
 const stateClass =
-  'hover:text-neutral active:text-neutral focus:text-neutral hover:bg-primary-40 active:bg-primary-80 focus:bg-primary-60'
+  'hover:text-neutral active:text-neutral focus:text-neutral hover:bg-primary-40 active:bg-primary focus:bg-primary-60'
 
 const variants = {
   variant: {
