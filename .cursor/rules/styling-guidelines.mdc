@@ -1,0 +1,149 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Styling Guidelines
+
+## TailwindCSS v4 Custom Colors
+
+### Color Usage Rules
+
+**❌ NEVER use hardcoded hex colors in className:**
+
+```jsx
+// Wrong
+<div className="text-[#1a1a1a] bg-[#ffffff]" />
+```
+
+**✅ ALWAYS use custom colors defined in [main.css](mdc:src/assets/css/main.css):**
+
+```jsx
+// Correct
+<div className="text-header-text bg-white" />
+```
+
+### Color Naming Convention
+
+Always use semantic color names based on actual color values, not context:
+
+**✅ Good naming:**
+
+```css
+--color-black: #000000;
+--color-white: #ffffff;
+--color-gray-200: #ebebeb;
+--color-gray-300: #d9d9d9;
+--color-gray-400: #c5c5c5;
+--color-gray-600: #3f3f46;
+--color-gray-800: #1a1a1a;
+--color-red-500: #ef4444;
+--color-blue-600: #2563eb;
+```
+
+**❌ Bad naming:**
+
+```css
+--color-pricing-bg: #ebebeb;  // Use --color-gray-200 instead
+--color-button-text: #1a1a1a;  // Use --color-gray-800 instead
+--color-primary-dark: #123456;  // Use actual color name like --color-blue-800
+```
+
+### Adding New Colors
+
+Add colors to [main.css](mdc:src/assets/css/main.css) in the `@theme` section:
+
+```css
+@theme {
+  /* Use proper color naming */
+  --color-gray-100: #f3f4f6;
+  --color-blue-500: #3b82f6;
+  --color-red-400: #f87171;
+}
+```
+
+### Available Custom Colors
+
+Current defined colors in [main.css](mdc:src/assets/css/main.css):
+
+- `black`: #000000
+- `white`: #ffffff
+- `gray-200`: #ebebeb
+- `gray-300`: #d9d9d9
+- `gray-400`: #c5c5c5
+- `gray-500`: #777777
+- `gray-600`: #3f3f46
+- `gray-800`: #1a1a1a
+- `header-text`: #1a1a1a
+- `header-border`: rgba(112, 115, 124, 0.22)
+- `logo-bg`: #d9d9d9
+- `hero-title`: #27272a
+- `hero-description`: #3f3f46
+- `hero-animation-bg`: #d9d9d9
+
+## Responsive Design Rules
+
+1. **Never use fixed max-width pixels:**
+
+   ```jsx
+   // Wrong
+   <div className="max-w-[1440px]" />
+
+   // Correct
+   <div className="container mx-auto" />
+   ```
+
+2. **Use responsive breakpoints:**
+
+   - `sm:` - 640px and up
+   - `md:` - 768px and up
+   - `lg:` - 1024px and up
+   - `xl:` - 1280px and up
+   - `2xl:` - 1536px and up
+
+3. **Container approach:**
+   ```jsx
+   <div className="container mx-auto px-4 md:px-6 lg:px-8" />
+   ```
+
+## Height Calculations
+
+When creating full-height sections below fixed headers:
+
+```jsx
+// Account for header height (60px)
+<section className="h-[calc(100vh-60px)] min-h-[800px]" />
+```
+
+## TailwindCSS Best Practices
+
+### Class Ordering
+
+Always follow consistent class ordering for maintainability:
+
+1. Layout (position, display, flex, grid)
+2. Sizing (width, height, padding, margin)
+3. Typography (font, text)
+4. Colors (background, text, border)
+5. Effects (shadow, opacity, transform)
+6. States (hover, focus, active)
+
+```jsx
+// Good
+<div className="relative flex w-full h-24 px-4 py-2 text-lg font-bold text-gray-800 bg-white rounded shadow hover:bg-gray-100" />
+
+// Avoid random ordering
+<div className="text-gray-800 px-4 relative bg-white w-full hover:bg-gray-100 flex rounded py-2 h-24 shadow font-bold text-lg" />
+```
+
+### Use Single Quotes
+
+Always use single quotes for className attributes:
+
+```jsx
+// Good
+<div className='flex items-center' />
+
+// Avoid
+<div className="flex items-center" />
+```

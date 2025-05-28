@@ -5,6 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import en from './en.json'
 import ja from './ja.json'
+import kr from './kr.json'
 
 const resources = {
   en: {
@@ -13,6 +14,9 @@ const resources = {
   ja: {
     translation: ja,
   },
+  kr: {
+    translation: kr,
+  },
 }
 
 i18n
@@ -20,8 +24,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'ja',
-    fallbackLng: 'ja',
+    lng: 'kr',
+    fallbackLng: 'kr',
     interpolation: {
       escapeValue: false,
     },

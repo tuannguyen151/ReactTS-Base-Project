@@ -1,0 +1,129 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Component Patterns
+
+## Component Structure
+
+### Standard Component Template
+
+```tsx
+import React from 'react'
+
+interface ComponentNameProps {
+  children?: React.ReactNode
+  className?: string
+  // Other specific props
+}
+
+const ComponentName: React.FC<ComponentNameProps> = ({
+  children,
+  className = '',
+  // Other props with defaults
+}) => {
+  return (
+    <div className={`base-classes ${className}`}>
+      {children}
+    </div>
+  )
+}
+
+export default ComponentName
+```
+
+## Interactive Components
+
+### Button Components with Hover Effects
+
+Reference: [CTAButton.tsx](mdc:src/components/atoms/CTAButton.tsx)
+
+```tsx
+// Add proper hover states and transitions
+className="transition-all hover:bg-gray-800"
+
+// For complex interactions, use group patterns
+<button className="group">
+  <div className="opacity-0 group-hover:opacity-10" />
+</button>
+```
+
+## Layout Patterns
+
+### Header Layout
+
+Reference: [header.tsx](mdc:src/layouts/header.tsx)
+
+Key patterns:
+- Fixed height: `h-[60px]`
+- Backdrop blur: `backdrop-blur-[64px]`
+- Container with responsive padding
+- Mobile-first navigation (hide menu on mobile)
+
+### Section Layout
+
+Reference: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
+
+Key patterns:
+- Calculate height minus header: `h-[calc(100vh-60px)]`
+- Two-column responsive layout: `lg:flex-row lg:w-1/2`
+- Aspect ratio for media: `aspect-video lg:aspect-[643/492]`
+
+## Responsive Patterns
+
+### Mobile-First Approach
+
+```tsx
+// Hide on mobile, show on tablet+
+<div className="hidden md:block">
+  <NavigationMenu />
+</div>
+
+// Stack on mobile, row on larger screens
+<div className="flex flex-col lg:flex-row">
+  <div className="w-full lg:w-1/2">Left</div>
+  <div className="w-full lg:w-1/2">Right</div>
+</div>
+```
+
+### Button Groups
+
+```tsx
+// Stack on mobile, row on small screens+
+<div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+  <CTAButton>Primary</CTAButton>
+  <CTAButton>Secondary</CTAButton>
+</div>
+```
+
+## Typography Patterns
+
+### Responsive Text Sizing
+
+```tsx
+// Progressive sizing with breakpoints
+className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+
+// Consistent line heights
+className="leading-tight" // for headings
+className="leading-relaxed" // for body text
+```
+
+## Import Patterns
+
+### Path Aliases
+
+Always use `@/` path alias for internal imports:
+
+```tsx
+import ComponentName from '@/components/atoms/ComponentName'
+import { utilFunction } from '@/lib/utils'
+```
+
+### Import Organization
+
+1. React imports first
+2. External library imports
+3. Internal component imports (atoms → molecules → organisms)
+4. Utility imports last

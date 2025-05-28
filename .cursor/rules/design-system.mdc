@@ -1,0 +1,151 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Design System
+
+## Layout Standards
+
+### Container System
+
+**Always use responsive container approach:**
+
+```tsx
+// Standard container pattern
+<div className="container mx-auto px-4 md:px-6 lg:px-8" />
+
+// Section wrapper
+<section className="relative flex items-center bg-white">
+  <div className="container mx-auto">
+    {/* Content */}
+  </div>
+</section>
+```
+
+### Spacing Scale
+
+Use consistent gap and padding:
+- `gap-4` / `gap-6` / `gap-8` / `gap-16` for component spacing
+- `px-4 py-3.5` for header padding
+- `px-4 py-16` for section padding
+- `space-y-6 lg:space-y-8` for vertical content spacing
+
+## Typography Scale
+
+### Headings
+
+```tsx
+// Main hero title
+className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
+
+// Section headings
+className="text-2xl md:text-3xl font-semibold"
+
+// Navigation text
+className="text-[15px] leading-[1.467] font-semibold tracking-[0.96%]"
+```
+
+### Body Text
+
+```tsx
+// Primary description
+className="text-base md:text-lg lg:text-xl leading-relaxed"
+
+// Secondary text
+className="text-sm md:text-base leading-relaxed"
+```
+
+## Component Standards
+
+### Button Variants
+
+Reference: [Button.tsx](mdc:src/components/atoms/Button.tsx), [CTAButton.tsx](mdc:src/components/atoms/CTAButton.tsx)
+
+#### Outlined Buttons (Header)
+- Small size: `px-3.5 py-1.5 text-sm`
+- Border: `border-header-border`
+- Hover: `hover:bg-white/10`
+
+#### CTA Buttons (Hero)
+- Medium size: `px-8 py-3 md:px-10`
+- Full rounded: `rounded-full`
+- Strong hover: `hover:bg-gray-800`
+
+### Navigation Patterns
+
+Reference: [NavigationMenu.tsx](mdc:src/components/molecules/NavigationMenu.tsx)
+
+- Gap between items: `gap-10`
+- Mobile hide: `hidden md:block`
+- Hover state: `hover:text-neutral-60`
+
+## Visual Effects
+
+### Header Effects
+
+```tsx
+// Backdrop blur with opacity overlay
+<header className="backdrop-blur-[64px]">
+  <div className="absolute inset-0 bg-white opacity-[0.74]" />
+</header>
+```
+
+### Interactive States
+
+```tsx
+// Button hover overlays
+<button className="group">
+  <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10" />
+</button>
+
+// Smooth transitions
+className="transition-all duration-200 ease-in-out"
+```
+
+## Responsive Behavior
+
+### Breakpoint Usage
+
+- **Mobile First**: Base styles for mobile
+- **md: (768px+)**: Show navigation, adjust typography
+- **lg: (1024px+)**: Two-column layouts, larger spacing
+- **xl: (1280px+)**: Maximum typography sizes
+
+### Layout Shifts
+
+```tsx
+// Single column → Two column
+<div className="flex flex-col lg:flex-row">
+  <div className="w-full lg:w-1/2">Left</div>
+  <div className="w-full lg:w-1/2">Right</div>
+</div>
+
+// Stacked buttons → Row buttons
+<div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+```
+
+## Animation Area Pattern
+
+Reference: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
+
+```tsx
+// Placeholder with proper aspect ratio
+<div className="relative flex aspect-video w-full items-center justify-center rounded-lg bg-hero-animation-bg lg:aspect-[643/492]">
+  <div className="text-center text-base font-semibold">
+    Animation Placeholder
+  </div>
+</div>
+```
+
+## Height Management
+
+### Full-Height Sections
+
+```tsx
+// Account for fixed header height
+<section className="h-[calc(100vh-60px)] min-h-[800px]" />
+
+// Standard header height
+<header className="h-[60px]" />
+```

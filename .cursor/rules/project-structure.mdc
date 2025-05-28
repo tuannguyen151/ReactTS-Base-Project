@@ -1,0 +1,61 @@
+---
+description: This is the project structure for the project.
+globs:
+alwaysApply: true
+---
+### Project Structure Overview
+
+#### Core Configuration
+- [package.json](mdc:package.json): Main project configuration with dependencies
+- [tsconfig.json](mdc:tsconfig.json) includes [tsconfig.app.json](mdc:tsconfig.app.json) and [tsconfig.node.json](mdc:tsconfig.node.json): TypeScript configuration files
+- [vite.config.ts](mdc:vite.config.ts): Vite build tool configuration
+- [.env.template](mdc:.env.template): Template environment configuration files
+
+#### Linting & Formatting
+- [eslint.config.mjs](mdc:eslint.config.mjs): ESLint configuration
+- [.prettierrc](mdc:.prettierrc): Prettier configuration
+- [.commitlintrc](mdc:.commitlintrc): Commit message linting
+- `.husky/`: Git hooks
+- `.lintstagedrc`: Lint-staged config
+
+#### Source Code Organization (`src/`)
+- `assets/`: Static assets (CSS, images, fonts)
+  - `images/`: Images
+  - `css/`: CSS files
+    - [main.css](mdc:src/assets/css/main.css): Main CSS file. Tailwind CSS is used.
+- `components/`: UI components (atomic design structure)
+  - `atoms/`: Basic components
+  - `molecules/`: Composite components
+  - `organisms/`: Complex components
+  - `templates/`: Page templates
+- `hooks/`: Custom React hooks
+- `layouts/`: Application layouts
+- `lib/`: Utility functions
+- `locales/`: Internationalization files
+  - `en.json`: English translation
+  - `ja.json`: Japanese translation
+  - `kr.json`: Korean translation (default)
+- `models/`: Type definitions for API responses
+- `pages/`: Page components
+- `routes/`: Routing configuration
+  - `[resource].ts`: Routing configuration for the resource
+- `services/`: API services (RTK Query)
+- `store/`: Redux store
+  - `[resource]/`: Redux resource files
+    - `[resource].selector.ts`: Redux selectors
+    - `[resource].slice.ts`: Redux slices
+- `sockets/`
+  - [base.ts](mdc:src/sockets/base.ts): WebSocket configuration
+
+#### Development Tools
+- `.storybook/`: Storybook configuration
+- `.vscode/`: VS Code settings
+
+### Key Practices
+- Use `@/` path alias for imports
+- Follow atomic design principles for components
+- Use RTK Query for API calls
+- Implement internationalization with i18next. Always define in [kr.json](mdc:src/locales/kr.json) and use it in component
+- Validate forms with react-hook-form and write custom hooks for each form
+- Define new config Tailwind CSS in [main.css](mdc:src/assets/css/main.css)
+- Do not fix linter errors
