@@ -10,8 +10,8 @@ alwaysApply: false
 ### i18n Configuration
 
 The i18n setup is configured in [i18n.tsx](mdc:src/locales/i18n.tsx):
-- Default language: Korean (`kr`)
-- Available languages: Korean, English, Japanese
+- Default language: English (`en`)
+- Available languages: English, Korean, Japanese
 - Translation files: [kr.json](mdc:src/locales/kr.json), [en.json](mdc:src/locales/en.json), [ja.json](mdc:src/locales/ja.json)
 - Already imported in [main.tsx](mdc:src/main.tsx)
 

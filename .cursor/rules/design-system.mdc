@@ -43,7 +43,7 @@ className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
 className="text-2xl md:text-3xl font-semibold"
 
 // Navigation text
-className="text-[15px] leading-[1.467] font-semibold tracking-[0.96%]"
+className="text-4 font-semibold"
 ```
 
 ### Body Text
@@ -86,8 +86,8 @@ Reference: [NavigationMenu.tsx](mdc:src/components/molecules/NavigationMenu.tsx)
 
 ```tsx
 // Backdrop blur with opacity overlay
-<header className="backdrop-blur-[64px]">
-  <div className="absolute inset-0 bg-white opacity-[0.74]" />
+<header className="backdrop-blur-3xl">
+  <div className="absolute inset-0 bg-white opacity-70" />
 </header>
 ```
 
@@ -131,7 +131,7 @@ Reference: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
 
 ```tsx
 // Placeholder with proper aspect ratio
-<div className="relative flex aspect-video w-full items-center justify-center rounded-lg bg-hero-animation-bg lg:aspect-[643/492]">
+<div className="relative flex aspect-video w-full items-center justify-center rounded-lg bg-hero-animation-bg">
   <div className="text-center text-base font-semibold">
     Animation Placeholder
   </div>
@@ -144,8 +144,8 @@ Reference: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
 
 ```tsx
 // Account for fixed header height
-<section className="h-[calc(100vh-60px)] min-h-[800px]" />
+<section className="h-[calc(100vh-4rem)] min-h-200" />
 
 // Standard header height
-<header className="h-[60px]" />
+<header className="h-16" />
 ```

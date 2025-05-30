@@ -10,27 +10,23 @@ alwaysApply: false
 ### Standard Component Template
 
 ```tsx
-import React from 'react'
+import React from "react";
 
 interface ComponentNameProps {
-  children?: React.ReactNode
-  className?: string
+  children?: React.ReactNode;
+  className?: string;
   // Other specific props
 }
 
 const ComponentName: React.FC<ComponentNameProps> = ({
   children,
-  className = '',
+  className = "",
   // Other props with defaults
 }) => {
-  return (
-    <div className={`base-classes ${className}`}>
-      {children}
-    </div>
-  )
-}
+  return <div className={`base-classes ${className}`}>{children}</div>;
+};
 
-export default ComponentName
+export default ComponentName;
 ```
 
 ## Interactive Components
@@ -56,8 +52,9 @@ className="transition-all hover:bg-gray-800"
 Reference: [header.tsx](mdc:src/layouts/header.tsx)
 
 Key patterns:
-- Fixed height: `h-[60px]`
-- Backdrop blur: `backdrop-blur-[64px]`
+
+- Fixed height: `h-16`
+- Backdrop blur: `backdrop-blur-3xl`
 - Container with responsive padding
 - Mobile-first navigation (hide menu on mobile)
 
@@ -66,9 +63,10 @@ Key patterns:
 Reference: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
 
 Key patterns:
-- Calculate height minus header: `h-[calc(100vh-60px)]`
+
+- Calculate height minus header: `h-[calc(100vh-4rem)]`
 - Two-column responsive layout: `lg:flex-row lg:w-1/2`
-- Aspect ratio for media: `aspect-video lg:aspect-[643/492]`
+- Aspect ratio for media: `aspect-video`
 
 ## Responsive Patterns
 
@@ -103,11 +101,11 @@ Key patterns:
 
 ```tsx
 // Progressive sizing with breakpoints
-className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+className = "text-3xl md:text-4xl lg:text-5xl xl:text-6xl";
 
 // Consistent line heights
-className="leading-tight" // for headings
-className="leading-relaxed" // for body text
+className = "leading-tight"; // for headings
+className = "leading-relaxed"; // for body text
 ```
 
 ## Import Patterns
@@ -117,8 +115,8 @@ className="leading-relaxed" // for body text
 Always use `@/` path alias for internal imports:
 
 ```tsx
-import ComponentName from '@/components/atoms/ComponentName'
-import { utilFunction } from '@/lib/utils'
+import ComponentName from "@/components/atoms/ComponentName";
+import { utilFunction } from "@/lib/utils";
 ```
 
 ### Import Organization
