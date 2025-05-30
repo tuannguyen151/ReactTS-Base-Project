@@ -64,6 +64,62 @@ npm run preview
 
 Declare the locale in the `src/locales` directory, then import and use it in the `src/locales/i18n.tsx` file
 
+### 4. GSAP Animation
+
+GSAP (GreenSock Animation Platform) is a powerful JavaScript library for creating high-performance animations. This project includes GSAP v3 for smooth and efficient animations.
+
+#### Key Features:
+
+- **Tween and Timeline**: Core animation capabilities.
+- **Plugins**: Extend functionality with plugins like `ScrollTrigger`, `Draggable`, etc.
+- **Eases**: Built-in easing functions for natural motion.
+- **Utility Methods**: Helper functions for common animation tasks.
+
+#### Usage:
+
+1. Import and use in your components:
+
+```tsx
+import { useRef } from 'react'
+
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+
+gsap.registerPlugin(useGSAP) // register the hook to avoid React version discrepancies
+
+const container = useRef()
+
+useGSAP(
+  () => {
+    // gsap code here...
+    gsap.to('.box', { x: 360 }) // <-- automatically reverted
+  },
+  { scope: container },
+) // <-- scope is for selector text (optional)
+```
+
+1. **Safe Animation with Context**:
+
+```tsx
+const container = useRef();
+
+const { contextSafe } = useGSAP({ scope: container }); // we can pass in a config object as the 1st parameter to make scoping simple
+
+// ✅ wrapped in contextSafe() - animation will be cleaned up correctly
+// selector text is scoped properly to the container.
+const onClickGood = contextSafe(() => {
+  gsap.to(".good", { rotation: 180 });
+});
+
+return (
+  <div ref={container}>
+    <button onClick={onClickGood} className="good"></button>
+  </div>
+);
+```
+
+For more details, visit the [GSAP Documentation](https://gsap.com/docs/v3/).
+
 ---
 
 ## ✍ GUIDE

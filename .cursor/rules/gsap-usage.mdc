@@ -1,0 +1,40 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# GSAP Usage Guide
+
+## Core Features
+- **Tween and Timeline**: Core animation capabilities.
+- **Plugins**: Extend functionality with plugins like `ScrollTrigger`, `Draggable`, etc.
+- **Eases**: Built-in easing functions for natural motion.
+- **Utility Methods**: Helper functions for common animation tasks.
+
+## Basic Usage
+1. **Import and Register GSAP for React**:
+   ```tsx
+   import { useGSAP } from '@gsap/react';
+   import gsap from 'gsap';
+
+   // Register useGSAP hook to avoid React version discrepancies
+   gsap.registerPlugin(useGSAP);
+   ```
+2. **Import GSAP Core**:
+   ```tsx
+   import { gsap } from 'gsap';
+   ```
+3. **Register Plugins**:
+   ```tsx
+   import { ScrollTrigger } from 'gsap/ScrollTrigger';
+   gsap.registerPlugin(ScrollTrigger);
+   ```
+4. **Safe Animation with Context**:
+   ```tsx
+   const { contextSafe } = useGSAP({ scope: container });
+   const onClickGood = contextSafe(() => {
+     gsap.to(".good", { rotation: 180 });
+   });
+   ```
+
+For more details, visit the [GSAP Documentation](mdc:https:/gsap.com/docs/v3).
