@@ -11,19 +11,21 @@ Follow strict atomic design hierarchy:
 
 ### Atoms (`src/components/atoms/`)
 - Basic building blocks (Button, Logo, Input, etc.)
-- Single responsibility components
+- Components with single responsibility, including base components from shadcn-ui
 - No dependencies on other components except utilities
-- Examples: [Logo.tsx](mdc:src/components/atoms/Logo.tsx), [Button.tsx](mdc:src/components/atoms/Button.tsx), [CTAButton.tsx](mdc:src/components/atoms/CTAButton.tsx)
+- Examples: [Button.tsx](mdc:src/components/atoms/Button.tsx)
+
+#### Atom Icons
+- SVG icons should be stored as components in `src/components/atoms/icons`
+- Examples: [CaretCircleRight.tsx](mdc:src/components/atoms/icons/CaretCircleRight.tsx)
 
 ### Molecules (`src/components/molecules/`)
 - Combinations of atoms
 - Reusable UI patterns
-- Examples: [NavigationMenu.tsx](mdc:src/components/molecules/NavigationMenu.tsx), [HeaderActions.tsx](mdc:src/components/molecules/HeaderActions.tsx)
 
 ### Organisms (`src/components/organisms/`)
 - Complex components combining molecules and atoms
 - Complete sections of UI
-- Examples: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
 
 ### Templates (`src/components/templates/`)
 - Page-level components
@@ -31,10 +33,21 @@ Follow strict atomic design hierarchy:
 
 ## Rules
 
+### General Rules
 1. **Atoms** must not import other atoms/molecules/organisms
 2. **Molecules** can import atoms but not other molecules/organisms
 3. **Organisms** can import atoms and molecules
 4. **Templates** can import any component type
 5. Always use TypeScript interfaces for props
-6. Export default the main component
+6. Export the main component (not default export)
 7. Use descriptive component names that reflect their purpose
+
+### Atoms Specific Rules
+8. **Single Responsibility**: Each atom does one thing only
+9. **forwardRef**: Always use React.forwardRef for DOM elements
+10. **displayName**: Set displayName for better debugging
+11. **CVA Variants**: Use class-variance-authority for styling variants
+12. **Tailwind CSS**: Use Tailwind classes, define custom ones in main.css
+13. **State Management**: Include hover, active, focus states when appropriate
+14. **Accessibility**: Support disabled state and proper ARIA attributes
+15. **asChild Pattern**: Include asChild prop for composition when needed

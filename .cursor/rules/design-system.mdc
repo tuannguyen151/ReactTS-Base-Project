@@ -60,7 +60,7 @@ className="text-sm md:text-base leading-relaxed"
 
 ### Button Variants
 
-Reference: [Button.tsx](mdc:src/components/atoms/Button.tsx), [CTAButton.tsx](mdc:src/components/atoms/CTAButton.tsx)
+Reference: [Button.tsx](mdc:src/components/atoms/Button.tsx)
 
 #### Outlined Buttons (Header)
 - Small size: `px-3.5 py-1.5 text-sm`

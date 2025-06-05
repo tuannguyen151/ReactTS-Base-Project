@@ -111,8 +111,8 @@ Current defined colors in [main.css](mdc:src/assets/css/main.css):
 When creating full-height sections below fixed headers:
 
 ```jsx
-// Account for header height (60px)
-<section className="h-[calc(100vh-60px)] min-h-[800px]" />
+// Account for header height (4rem)
+<section className="h-[calc(100vh-4rem)]" />
 ```
 
 ## TailwindCSS Best Practices

@@ -13,17 +13,13 @@ alwaysApply: false
 import React from "react";
 
 interface ComponentNameProps {
-  children?: React.ReactNode;
-  className?: string;
-  // Other specific props
+  // specific props
 }
 
 const ComponentName: React.FC<ComponentNameProps> = ({
-  children,
-  className = "",
-  // Other props with defaults
+  // props with defaults
 }) => {
-  return <div className={`base-classes ${className}`}>{children}</div>;
+  return <></>;
 };
 
 export default ComponentName;
@@ -33,7 +29,7 @@ export default ComponentName;
 
 ### Button Components with Hover Effects
 
-Reference: [CTAButton.tsx](mdc:src/components/atoms/CTAButton.tsx)
+Reference: [Button.tsx](mdc:src/components/atoms/Button.tsx)
 
 ```tsx
 // Add proper hover states and transitions
@@ -79,9 +75,9 @@ Key patterns:
 </div>
 
 // Stack on mobile, row on larger screens
-<div className="flex flex-col lg:flex-row">
-  <div className="w-full lg:w-1/2">Left</div>
-  <div className="w-full lg:w-1/2">Right</div>
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <div>Left</div>
+  <div>Right</div>
 </div>
 ```
 
@@ -90,8 +86,8 @@ Key patterns:
 ```tsx
 // Stack on mobile, row on small screens+
 <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-  <CTAButton>Primary</CTAButton>
-  <CTAButton>Secondary</CTAButton>
+  <Button>Primary</Button>
+  <Button>Secondary</Button>
 </div>
 ```
 
@@ -123,5 +119,5 @@ import { utilFunction } from "@/lib/utils";
 
 1. React imports first
 2. External library imports
-3. Internal component imports (atoms → molecules → organisms)
+3. Internal component imports (atoms → molecules → organisms → templates → pages)
 4. Utility imports last
