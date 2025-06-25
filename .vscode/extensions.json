@@ -28,6 +28,9 @@
     "bradlc.vscode-tailwindcss",
 
     // Turbo Console Log. Automate the process of writing meaningful log messages
-    "ChakrounAnas.turbo-console-log"
+    "ChakrounAnas.turbo-console-log",
+
+    // Code Spell Checker. Spelling checker for source code
+    "streetsidesoftware.code-spell-checker"
   ]
 }
