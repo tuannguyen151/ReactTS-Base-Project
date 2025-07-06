@@ -1,0 +1,227 @@
+{
+  "designSystem": {
+    "name": "Modern Mobile App Design System",
+    "version": "1.0",
+    "description": "Hệ thống thiết kế hiện đại cho ứng dụng di động với phong cách gradient và glassmorphism"
+  },
+  "colorPalette": {
+    "primary": {
+      "blue": "#3B82F6",
+      "lightBlue": "#60A5FA",
+      "darkBlue": "#1E40AF"
+    },
+    "secondary": {
+      "green": "#10B981",
+      "lightGreen": "#34D399",
+      "mint": "#6EE7B7"
+    },
+    "neutral": {
+      "white": "#FFFFFF",
+      "lightGray": "#F8FAFC",
+      "mediumGray": "#E2E8F0",
+      "darkGray": "#64748B",
+      "black": "#0F172A"
+    },
+    "gradients": {
+      "primaryGradient": "linear-gradient(135deg, #3B82F6 0%, #10B981 100%)",
+      "backgroundGradient": "linear-gradient(135deg, #DBEAFE 0%, #A7F3D0 100%)",
+      "cardGradient": "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "primary": "SF Pro Display",
+      "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    },
+    "fontSizes": {
+      "xs": "12px",
+      "sm": "14px",
+      "base": "16px",
+      "lg": "18px",
+      "xl": "20px",
+      "2xl": "24px",
+      "3xl": "30px"
+    },
+    "fontWeights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "layout": {
+    "containerMaxWidth": "375px",
+    "padding": {
+      "xs": "8px",
+      "sm": "16px",
+      "md": "24px",
+      "lg": "32px"
+    },
+    "borderRadius": {
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "full": "9999px"
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "2xl": "48px"
+    }
+  },
+  "components": {
+    "mobileScreen": {
+      "structure": {
+        "aspectRatio": "9:19.5",
+        "backgroundColor": "gradient",
+        "padding": "24px 16px"
+      },
+      "header": {
+        "height": "60px",
+        "elements": ["statusBar", "navigationIcons", "userInfo"],
+        "alignment": "space-between",
+        "backgroundColor": "transparent"
+      },
+      "content": {
+        "scrollable": true,
+        "sections": ["featured", "categories", "lists"],
+        "spacing": "24px"
+      },
+      "navigation": {
+        "position": "bottom",
+        "height": "80px",
+        "style": "tabBar",
+        "backgroundColor": "white",
+        "borderRadius": "24px 24px 0 0"
+      }
+    },
+    "cards": {
+      "glassmorphism": {
+        "backgroundColor": "rgba(255, 255, 255, 0.8)",
+        "backdropFilter": "blur(20px)",
+        "border": "1px solid rgba(255, 255, 255, 0.2)",
+        "borderRadius": "16px",
+        "boxShadow": "0 8px 32px rgba(0, 0, 0, 0.1)"
+      },
+      "productCard": {
+        "aspectRatio": "1:1.2",
+        "padding": "16px",
+        "borderRadius": "12px",
+        "backgroundColor": "white",
+        "boxShadow": "0 4px 16px rgba(0, 0, 0, 0.08)"
+      }
+    },
+    "buttons": {
+      "primary": {
+        "backgroundColor": "primaryGradient",
+        "color": "white",
+        "borderRadius": "12px",
+        "padding": "12px 24px",
+        "fontWeight": "semibold",
+        "fontSize": "base"
+      },
+      "secondary": {
+        "backgroundColor": "white",
+        "color": "darkBlue",
+        "border": "1px solid lightGray",
+        "borderRadius": "12px",
+        "padding": "12px 24px"
+      },
+      "social": {
+        "backgroundColor": "white",
+        "border": "1px solid lightGray",
+        "borderRadius": "8px",
+        "padding": "12px",
+        "display": "flex",
+        "alignItems": "center",
+        "justifyContent": "center"
+      }
+    },
+    "forms": {
+      "inputField": {
+        "backgroundColor": "white",
+        "border": "1px solid lightGray",
+        "borderRadius": "8px",
+        "padding": "12px 16px",
+        "fontSize": "base",
+        "focusBorder": "2px solid blue"
+      },
+      "formContainer": {
+        "backgroundColor": "glassmorphism",
+        "borderRadius": "16px",
+        "padding": "24px",
+        "spacing": "16px"
+      }
+    },
+    "sections": {
+      "sectionHeader": {
+        "display": "flex",
+        "justifyContent": "space-between",
+        "alignItems": "center",
+        "marginBottom": "16px"
+      },
+      "sectionTitle": {
+        "fontSize": "xl",
+        "fontWeight": "semibold",
+        "color": "darkGray"
+      },
+      "viewAllButton": {
+        "fontSize": "sm",
+        "color": "blue",
+        "textDecoration": "none"
+      }
+    }
+  },
+  "designPrinciples": {
+    "visualStyle": {
+      "approach": "Modern glassmorphism với gradient backgrounds",
+      "emphasis": "Clean, minimal với depth layers",
+      "colorUsage": "Blue-green gradient làm chủ đạo, white cards tạo contrast"
+    },
+    "userExperience": {
+      "navigation": "Bottom tab navigation cho mobile",
+      "interaction": "Touch-friendly buttons và cards",
+      "feedback": "Subtle shadows và hover states"
+    },
+    "layout": {
+      "structure": "Card-based layout với consistent spacing",
+      "hierarchy": "Clear visual hierarchy với typography scales",
+      "responsiveness": "Mobile-first design approach"
+    }
+  },
+  "implementationGuidelines": {
+    "cssFrameworks": ["Tailwind CSS", "Styled Components"],
+    "animations": {
+      "transitions": "0.3s ease-in-out",
+      "hover": "transform: translateY(-2px)",
+      "loading": "skeleton loaders"
+    },
+    "accessibility": {
+      "contrast": "WCAG AA compliant",
+      "touchTargets": "minimum 44px",
+      "semanticHTML": "proper heading hierarchy"
+    },
+    "performance": {
+      "images": "WebP format với lazy loading",
+      "css": "Critical CSS inline",
+      "javascript": "Code splitting theo components"
+    }
+  },
+  "componentVariations": {
+    "screenTypes": {
+      "dashboard": "Grid layout với featured content",
+      "authentication": "Centered form với social login options",
+      "checkout": "Step-by-step form với payment methods",
+      "profile": "User info với action buttons"
+    },
+    "cardStyles": {
+      "transparent": "Glassmorphism effect",
+      "solid": "White background với subtle shadow",
+      "gradient": "Colored background với white text"
+    }
+  }
+}

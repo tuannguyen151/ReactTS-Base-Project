@@ -1,0 +1,206 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Cấu trúc Thư Mục Project
+
+## Tổng Quan Cấu Trúc
+
+ReactTS-Base-Project sử dụng kiến trúc modular với các thành phần được tổ chức theo nguyên tắc atomic design và phân chia rõ ràng trách nhiệm.
+
+## Cấu Trúc Root Level
+
+```
+ReactTS-Base-Project/
+├── 📁 .cursor/rules/          # Cursor rules và conventions
+├── 📁 .git/                  # Git repository
+├── 📁 .husky/                # Git hooks
+├── 📁 .storybook/            # Storybook configuration
+├── 📁 .vscode/               # VS Code settings
+├── 📁 docs/                  # Tài liệu dự án
+├── 📁 node_modules/          # Dependencies
+├── 📁 public/                # Static assets
+├── 📁 src/                   # Source code chính
+├── 📄 package.json           # Project dependencies
+├── 📄 tsconfig.json          # TypeScript configuration
+├── 📄 vite.config.ts         # Vite build configuration
+├── 📄 eslint.config.mjs      # ESLint configuration
+├── 📄 .prettierrc            # Prettier configuration
+└── 📄 README.md              # Project documentation
+```
+
+## Cấu Trúc Source Code (`src/`)
+
+### Core Files
+```
+src/
+├── 📄 App.tsx               # Root component
+├── 📄 main.tsx              # Entry point
+├── 📄 config.ts             # App configuration
+├── 📄 global.d.ts           # Global type definitions
+└── 📄 vite-env.d.ts         # Vite environment types
+```
+
+### Assets (`src/assets/`)
+```
+assets/
+├── css/
+│   └── 📄 main.css          # Main CSS với Tailwind
+└── images/
+    └── 📄 react.svg         # Static images
+```
+
+### Components (`src/components/`) - Atomic Design
+```
+components/
+├── atoms/                   # Basic building blocks
+│   ├── 📄 Button.tsx
+│   ├── 📄 Button.stories.tsx
+│   ├── FormInput/
+│   ├── GlassButton/
+│   ├── PasswordStrengthIndicator/
+│   └── icons/
+│       └── 📄 CaretCircleRight.tsx
+├── molecules/               # Composite components
+├── organisms/               # Complex components
+└── templates/               # Page templates
+```
+
+### Pages (`src/pages/`)
+```
+pages/
+├── auth/
+│   └── 📄 login.page.tsx
+├── errors/
+│   ├── 📄 403.page.tsx
+│   ├── 📄 404.page.tsx
+│   └── 📄 504.page.tsx
+├── 📄 home.page.tsx
+└── 📄 private.page.tsx
+```
+
+### Routing (`src/routes/`)
+```
+routes/
+├── 📄 index.tsx             # Main routing configuration
+├── 📄 auth.route.tsx        # Authentication routes
+├── 📄 home.route.tsx        # Home routes
+├── 📄 errors.route.tsx      # Error page routes
+└── private/
+    ├── 📄 index.tsx
+    └── 📄 private.route.tsx
+```
+
+### State Management (`src/store/`)
+```
+store/
+├── 📄 index.ts              # Store configuration
+└── auth/
+    ├── 📄 auth.slice.ts     # Redux slice
+    └── 📄 auth.selector.ts  # Redux selectors
+```
+
+### Services (`src/services/`)
+```
+services/
+├── 📄 base.ts               # Base API configuration
+└── 📄 auth.service.ts       # Authentication service
+```
+
+### Internationalization (`src/locales/`)
+```
+locales/
+├── 📄 i18n.tsx              # i18next configuration
+├── 📄 i18next.d.ts          # Type definitions
+├── 📄 kr.json               # Korean (default)
+├── 📄 en.json               # English
+└── 📄 ja.json               # Japanese
+```
+
+### Other Directories
+```
+src/
+├── hooks/                   # Custom React hooks
+│   └── login/
+│       └── 📄 useValidateLoginForm.hook.ts
+├── layouts/                 # Layout components
+│   ├── 📄 header.tsx
+│   ├── 📄 sidebar.tsx
+│   └── 📄 index.tsx
+├── lib/                     # Utility functions
+│   └── 📄 utils.ts
+├── models/                  # Type definitions
+│   └── 📄 auth.model.ts
+└── sockets/                 # WebSocket configuration
+    └── 📄 base.ts
+```
+
+## Configuration Files
+
+### Build & Development
+- `vite.config.ts` - Vite configuration
+- `tsconfig.json` - TypeScript main config
+- `tsconfig.app.json` - App-specific TypeScript config
+- `tsconfig.node.json` - Node-specific TypeScript config
+- `postcss.config.mjs` - PostCSS configuration
+
+### Linting & Formatting
+- `eslint.config.mjs` - ESLint configuration
+- `.prettierrc` - Prettier formatting rules
+- `.commitlintrc` - Commit message linting
+- `.lintstagedrc` - Lint-staged configuration
+
+### Development Tools
+- `components.json` - UI component configuration
+- `.cursorignore` - Cursor exclusion patterns
+- `.gitignore` - Git exclusion patterns
+- `.nvmrc` - Node version specification
+
+## Documentation (`docs/`)
+```
+docs/
+├── 📄 architecture.md       # Kiến trúc hệ thống
+└── 📄 prd.md               # Product Requirements Document
+```
+
+## Naming Conventions
+
+### Files
+- **Pages**: `*.page.tsx`
+- **Components**: `ComponentName.tsx`
+- **Stories**: `ComponentName.stories.tsx`
+- **Hooks**: `use*.hook.ts`
+- **Services**: `*.service.ts`
+- **Models**: `*.model.ts`
+- **Routes**: `*.route.tsx`
+
+### Directories
+- Use kebab-case: `form-input/`, `password-strength/`
+- Group related files together
+- Follow atomic design principles for components
+
+## Path Aliases
+
+Sử dụng `@/` làm alias cho thư mục `src/`:
+```typescript
+import { Button } from '@/components/atoms/Button'
+import { useAuth } from '@/hooks/auth/useAuth.hook'
+```
+
+## Best Practices
+
+1. **Atomic Design**: Tuân thủ nguyên tắc atoms → molecules → organisms → templates
+2. **Colocation**: Đặt file liên quan gần nhau (stories, tests, styles)
+3. **Single Responsibility**: Mỗi file có một trách nhiệm cụ thể
+4. **Consistent Naming**: Sử dụng convention đặt tên nhất quán
+5. **Type Safety**: Định nghĩa types trong `models/` hoặc cùng file component
+
+## Quy Tắc Tổ Chức
+
+- **Components**: Theo atomic design hierarchy
+- **Pages**: Theo feature hoặc route
+- **Services**: Theo domain/resource
+- **Store**: Theo feature slice
+- **Hooks**: Theo chức năng hoặc page
+- **Types**: Centralized trong `models/` hoặc inline với component
