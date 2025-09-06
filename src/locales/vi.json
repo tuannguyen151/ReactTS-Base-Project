@@ -1,0 +1,37 @@
+{
+  "common": {
+    "logo": "LOGO",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "loading": "Đang tải..."
+  },
+  "navigation": {
+    "home": "Trang chủ",
+    "features": "Tính năng",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ",
+    "pricing": "Bảng giá"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "register": "Đăng ký",
+    "forgotPassword": "Quên mật khẩu",
+    "email": "Email",
+    "password": "Mật khẩu"
+  },
+  "hero": {
+    "title": "Giải pháp tốt nhất cho doanh nghiệp của bạn",
+    "description": "Tối ưu hóa quy trình làm việc với công nghệ hiện đại",
+    "ctaPrimary": "Bắt đầu ngay",
+    "ctaSecondary": "Tìm hiểu thêm"
+  },
+  "errorMessages": {
+    "required": "{{field}} là bắt buộc",
+    "email": "Email không hợp lệ",
+    "minLength": "{{field}} phải có ít nhất {{min}} ký tự",
+    "maxLength": "{{field}} không được vượt quá {{max}} ký tự"
+  }
+}

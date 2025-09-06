@@ -6,8 +6,12 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import en from './en.json'
 import ja from './ja.json'
 import kr from './kr.json'
+import vi from './vi.json'
 
 const resources = {
+  vi: {
+    translation: vi,
+  },
   en: {
     translation: en,
   },
@@ -24,8 +28,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'kr',
-    fallbackLng: 'kr',
+    lng: 'vi',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
