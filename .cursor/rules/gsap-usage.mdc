@@ -1,5 +1,5 @@
 ---
-description:
+description: Animation with GSAP
 globs:
 alwaysApply: false
 ---
@@ -37,4 +37,4 @@ alwaysApply: false
    });
    ```
 
-For more details, visit the [GSAP Documentation](mdc:https:/gsap.com/docs/v3).
+For more details, visit the [GSAP Documentation](https:/gsap.com/docs/v3).

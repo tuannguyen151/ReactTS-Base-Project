@@ -1,61 +1,365 @@
 ---
-description: This is the project structure for the project.
+description: Project directory structure, file organization, and important files/folders overview
 globs:
 alwaysApply: true
 ---
-### Project Structure Overview
 
-#### Core Configuration
-- [package.json](mdc:package.json): Main project configuration with dependencies
-- [tsconfig.json](mdc:tsconfig.json) includes [tsconfig.app.json](mdc:tsconfig.app.json) and [tsconfig.node.json](mdc:tsconfig.node.json): TypeScript configuration files
-- [vite.config.ts](mdc:vite.config.ts): Vite build tool configuration
-- [.env.template](mdc:.env.template): Template environment configuration files
+# Directory Structure and File Organization
 
-#### Linting & Formatting
-- [eslint.config.mjs](mdc:eslint.config.mjs): ESLint configuration
-- [.prettierrc](mdc:.prettierrc): Prettier configuration
-- [.commitlintrc](mdc:.commitlintrc): Commit message linting
-- `.husky/`: Git hooks
-- `.lintstagedrc`: Lint-staged config
+This document outlines the complete directory structure, file organization patterns, and important files/folders in this React TypeScript project with Tailwind CSS v4 and Shadcn/ui components.
 
-#### Source Code Organization (`src/`)
-- `assets/`: Static assets (CSS, images, fonts)
-  - `images/`: Images
-  - `css/`: CSS files
-    - [main.css](mdc:src/assets/css/main.css): Main CSS file. Tailwind CSS is used.
-- `components/`: UI components (atomic design structure)
-  - `atoms/`: Basic components
-  - `molecules/`: Composite components
-  - `organisms/`: Complex components
-  - `templates/`: Page templates
-- `hooks/`: Custom React hooks
-- `layouts/`: Application layouts
-- `lib/`: Utility functions
-- `locales/`: Internationalization files
-  - `en.json`: English translation
-  - `ja.json`: Japanese translation
-  - `kr.json`: Korean translation (default)
-- `models/`: Type definitions for API responses
-- `pages/`: Page components
-- `routes/`: Routing configuration
-  - `[resource].ts`: Routing configuration for the resource
-- `services/`: API services (RTK Query)
-- `store/`: Redux store
-  - `[resource]/`: Redux resource files
-    - `[resource].selector.ts`: Redux selectors
-    - `[resource].slice.ts`: Redux slices
-- `sockets/`
-  - [base.ts](mdc:src/sockets/base.ts): WebSocket configuration
+## Project Overview
 
-#### Development Tools
-- `.storybook/`: Storybook configuration
-- `.vscode/`: VS Code settings
+- **Framework**: React 19.1.0 with TypeScript
+- **Styling**: Tailwind CSS v4.1.7 (CSS-first configuration)
+- **UI Components**: Shadcn/ui pattern with manual component integration
+- **Build Tool**: Vite 6.3.5
+- **State Management**: Redux Toolkit with RTK Query
+- **Routing**: React Router DOM v7.6.0
+- **Internationalization**: i18next with react-i18next
+- **Testing/Documentation**: Storybook
 
-### Key Practices
-- Use `@/` path alias for imports
-- Follow atomic design principles for components
-- Use RTK Query for API calls
-- Implement internationalization with i18next. Always define in [kr.json](mdc:src/locales/kr.json) and use it in component
-- Validate forms with react-hook-form and write custom hooks for each form
-- Define new config Tailwind CSS in [main.css](mdc:src/assets/css/main.css)
-- Do not fix linter errors
+## Root Level Structure
+
+```
+/
+├── package.json              # Main dependencies and scripts
+├── tsconfig.json             # Main TypeScript configuration
+├── tsconfig.app.json         # App-specific TypeScript config
+├── tsconfig.node.json        # Node-specific TypeScript config
+├── vite.config.ts            # Vite build configuration
+├── components.json           # Shadcn/ui configuration (if exists)
+├── eslint.config.mjs         # ESLint configuration
+├── postcss.config.mjs        # PostCSS configuration for Tailwind CSS v4
+├── .env.template             # Environment variables template
+├── index.html                # HTML entry point
+├── README.md                 # Project documentation
+└── LICENSE                   # License file
+```
+
+## Source Code Structure (`src/`)
+
+### Main Application Files
+
+```
+src/
+├── main.tsx                  # Application entry point
+├── App.tsx                   # Root application component
+├── vite-env.d.ts            # Vite environment types
+├── global.d.ts              # Global TypeScript declarations
+└── config.ts                # Application configuration
+```
+
+### Assets (`src/assets/`)
+
+```
+assets/
+├── css/
+│   └── main.css             # Main CSS file with Tailwind v4 imports
+└── images/
+    └── react.svg            # Static images
+```
+
+**Key Points:**
+- `main.css` contains Tailwind CSS v4 `@import` directives
+- Custom CSS and `@theme` configurations go in `main.css`
+- Static assets organized by type (css, images, fonts)
+
+### Components (`src/components/`) - Atomic Design Structure
+
+```
+components/
+├── atoms/                  # Basic UI elements
+│   ├── Button.tsx          # Base button component
+│   ├── Button.stories.tsx  # Storybook stories
+│   └── icons/              # Icon components
+│       └── CaretCircleRight.tsx
+├── molecules/              # Composite components (empty initially)
+├── organisms/              # Complex components (empty initially)
+└── templates/              # Page templates (empty initially)
+```
+
+**Naming Conventions:**
+- **Shadcn Components**: Always use PascalCase (e.g., `Button.tsx`, not `button.tsx`)
+- **Icons**: PascalCase with descriptive names
+- **Stories**: Component name + `.stories.tsx` suffix
+- Follow atomic design hierarchy: atoms → molecules → organisms → templates
+
+### Hooks (`src/hooks/`)
+
+```
+hooks/
+└── login/
+    └── useValidateLoginForm.hook.ts    # Form validation hook
+```
+
+**Naming Pattern:**
+- `use[FeatureName][Purpose].hook.ts`
+- Organized by feature/domain
+- Custom hooks for form validation, API calls, state management
+
+### Layouts (`src/layouts/`)
+
+```
+layouts/
+├── index.tsx               # Main layout exports
+├── header.tsx              # Header layout component
+└── sidebar.tsx             # Sidebar layout component
+```
+
+**Purpose:**
+- Reusable layout components
+- Header, sidebar, footer structures
+- Layout composition and routing integration
+
+### Library Utilities (`src/lib/`)
+
+```
+lib/
+└── utils.ts                # Utility functions (cn, clsx, etc.)
+```
+
+**Contains:**
+- `cn()` function for conditional styling with `tailwind-merge`
+- Utility functions shared across components
+- Helper functions for data manipulation
+
+### Internationalization (`src/locales/`)
+
+```
+locales/
+├── i18n.tsx               # i18next configuration
+├── i18next.d.ts           # i18next TypeScript declarations
+├── kr.json                # Korean translations
+├── en.json                # English translations
+├── ja.json                # Japanese translations
+└── vi.json                # Vietnamese translations (default)
+```
+
+**Rules:**
+- Always define new keys in `vi.json` first
+- Use consistent key naming conventions
+- Organize keys by feature/page sections
+
+### Models/Types (`src/models/`)
+
+```
+models/
+└── auth.model.ts          # Authentication-related types
+```
+
+**Purpose:**
+- TypeScript interfaces and types
+- API response models
+- Domain-specific type definitions
+- Organized by feature/domain
+
+### Pages (`src/pages/`)
+
+```
+pages/
+├── home.page.tsx          # Home page component
+├── private.page.tsx       # Private/protected page
+├── auth/
+│   └── login.page.tsx     # Login page
+└── errors/
+    ├── 403.page.tsx       # Forbidden error page
+    ├── 404.page.tsx       # Not found error page
+    └── 504.page.tsx       # Server error page
+```
+
+**Naming Pattern:**
+- `[pageName].page.tsx`
+- Organized by feature/domain
+- Error pages in dedicated `errors/` folder
+
+### Routing (`src/routes/`)
+
+```
+routes/
+├── index.tsx              # Main routing configuration
+├── auth.route.tsx         # Authentication routes
+├── errors.route.tsx       # Error page routes
+├── home.route.tsx         # Home page routes
+└── private/
+    ├── index.tsx          # Private routes exports
+    └── private.route.tsx  # Protected routes
+```
+
+**Organization:**
+- Route definitions separate from components
+- Grouped by access level (public, private)
+- Feature-based route organization
+
+### Services/API (`src/services/`)
+
+```
+services/
+├── base.ts                # Base API configuration
+└── auth.service.ts        # Authentication API services
+```
+
+**Purpose:**
+- RTK Query API slice definitions
+- Base API configuration (endpoints, headers)
+- Service layer for external API calls
+
+### WebSocket (`src/sockets/`)
+
+```
+sockets/
+└── base.ts                # WebSocket base configuration
+```
+
+**Purpose:**
+- Socket.io client configuration
+- Real-time communication setup
+- WebSocket event handling
+
+### State Management (`src/store/`)
+
+```
+store/
+├── index.ts               # Store configuration and exports
+└── auth/
+    ├── auth.slice.ts      # Redux auth slice
+    └── auth.selector.ts   # Redux auth selectors
+```
+
+**Organization Pattern:**
+- Feature-based state organization
+- Separate slice and selector files
+- RTK slices with type safety
+
+## Important Configuration Files
+
+### Dependencies (Key Packages)
+
+```json
+{
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.0",
+    "@reduxjs/toolkit": "^2.8.2",
+    "react-router-dom": "^7.6.0",
+    "i18next": "^25.2.0",
+    "react-i18next": "^15.5.1",
+    "react-hook-form": "^7.56.4",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.7",
+    "@tailwindcss/postcss": "^4.1.7",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}
+```
+
+### Tailwind CSS v4 Setup
+
+**`src/assets/css/main.css`:**
+```css
+@import "tailwindcss";
+
+@theme {
+  /* Custom theme configurations */
+}
+```
+
+**`postcss.config.mjs`:**
+```js
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+## Development Tools Structure
+
+```
+.vscode/                  # VS Code settings
+.storybook/               # Storybook configuration
+.husky/                   # Git hooks
+public/                   # Static public assets
+node_modules/             # Dependencies (ignored)
+```
+
+## File Naming Conventions
+
+### Components
+- **React Components**: PascalCase (`Button.tsx`, `LoginForm.tsx`)
+- **Shadcn Components**: Always PascalCase (convert from lowercase)
+- **Pages**: `[name].page.tsx`
+- **Routes**: `[name].route.tsx`
+- **Hooks**: `use[Name][Purpose].hook.ts`
+- **Services**: `[domain].service.ts`
+- **Models**: `[domain].model.ts`
+- **Stories**: `[Component].stories.tsx`
+
+### Directories
+- **kebab-case** for multi-word directories
+- **Singular nouns** for containers (`component/`, `page/`, `service/`)
+- **Feature-based organization** (group by domain, not by file type)
+
+## Import Path Conventions
+
+```typescript
+// Use `@/` alias for src imports
+import { Button } from "@/components/atoms/Button"
+import { cn } from "@/lib/utils"
+import { useAuthStore } from "@/store/auth/auth.selector"
+
+// Relative imports only within the same feature
+import "./LoginForm.css"
+```
+
+## Key Integration Patterns
+
+### Shadcn/ui Pattern
+- Manual component integration (no package dependency)
+- Uses CVA (class-variance-authority) for variants
+- `cn()` utility with tailwind-merge for conditional classes
+- Radix UI primitives as base components
+
+### State Management Pattern
+- RTK Query for server state
+- RTK slices for client state
+- Separate selectors for derived state
+- Feature-based store organization
+
+### Styling Pattern
+- Tailwind CSS v4 with CSS-first configuration
+- Utility-first approach with design tokens
+- Component variants using CVA
+- No custom CSS files except main.css
+
+## Best Practices
+
+1. **Component Organization**: Follow atomic design structure
+2. **TypeScript**: Use strict typing with proper interfaces
+3. **Internationalization**: Always define keys in vi.json first
+4. **State Management**: Use RTK Query for API calls, RTK slices for client state
+5. **Naming**: Be consistent with PascalCase for components, kebab-case for files
+6. **Imports**: Use `@/` alias, avoid deep relative imports
+7. **Documentation**: Include Storybook stories for reusable components
+
+## Migration Notes
+
+### From Shadcn Package to Manual Integration
+- Components copied manually instead of installed via CLI
+- Naming converted from lowercase to PascalCase
+- CVA and Radix dependencies manually managed
+- Customization through direct file editing
+
+### Tailwind CSS v4 Considerations
+- CSS-first configuration in `main.css`
+- No `tailwind.config.js` file needed
+- `@import "tailwindcss"` instead of separate imports
+- PostCSS plugin from dedicated package

@@ -1,5 +1,5 @@
 ---
-description:
+description: Styling guidelines for Tailwind CSS v4
 globs:
 alwaysApply: false
 ---
@@ -11,16 +11,16 @@ alwaysApply: false
 
 **❌ NEVER use hardcoded hex colors in className:**
 
-```jsx
+```tsx
 // Wrong
 <div className="text-[#1a1a1a] bg-[#ffffff]" />
 ```
 
-**✅ ALWAYS use custom colors defined in [main.css](mdc:src/assets/css/main.css):**
+**✅ ALWAYS use custom colors defined in [main.css](/src/assets/css/main.css):**
 
-```jsx
+```tsx
 // Correct
-<div className="text-header-text bg-white" />
+<div className="text-dark bg-white" />
 ```
 
 ### Color Naming Convention
@@ -51,7 +51,7 @@ Always use semantic color names based on actual color values, not context:
 
 ### Adding New Colors
 
-Add colors to [main.css](mdc:src/assets/css/main.css) in the `@theme` section:
+Add colors to [main.css](/src/assets/css/main.css) in the `@theme` section:
 
 ```css
 @theme {
@@ -64,7 +64,7 @@ Add colors to [main.css](mdc:src/assets/css/main.css) in the `@theme` section:
 
 ### Available Custom Colors
 
-Current defined colors in [main.css](mdc:src/assets/css/main.css):
+Current defined colors in [main.css](/src/assets/css/main.css):
 
 - `black`: #000000
 - `white`: #ffffff
@@ -85,7 +85,7 @@ Current defined colors in [main.css](mdc:src/assets/css/main.css):
 
 1. **Never use fixed max-width pixels:**
 
-   ```jsx
+   ```tsx
    // Wrong
    <div className="max-w-[1440px]" />
 
@@ -102,7 +102,7 @@ Current defined colors in [main.css](mdc:src/assets/css/main.css):
    - `2xl:` - 1536px and up
 
 3. **Container approach:**
-   ```jsx
+   ```tsx
    <div className="container mx-auto px-4 md:px-6 lg:px-8" />
    ```
 
@@ -110,7 +110,7 @@ Current defined colors in [main.css](mdc:src/assets/css/main.css):
 
 When creating full-height sections below fixed headers:
 
-```jsx
+```tsx
 // Account for header height (4rem)
 <section className="h-[calc(100vh-4rem)]" />
 ```
@@ -128,7 +128,7 @@ Always follow consistent class ordering for maintainability:
 5. Effects (shadow, opacity, transform)
 6. States (hover, focus, active)
 
-```jsx
+```tsx
 // Good
 <div className="relative flex w-full h-24 px-4 py-2 text-lg font-bold text-gray-800 bg-white rounded shadow hover:bg-gray-100" />
 
@@ -140,7 +140,7 @@ Always follow consistent class ordering for maintainability:
 
 Always use single quotes for className attributes:
 
-```jsx
+```tsx
 // Good
 <div className='flex items-center' />
 

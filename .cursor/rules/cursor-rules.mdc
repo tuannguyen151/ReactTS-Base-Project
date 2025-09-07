@@ -1,0 +1,230 @@
+---
+description: How to add or edit Cursor rules in your project
+globs:
+alwaysApply: false
+---
+# Cursor Rules Management Guide
+
+## Rule Structure Format
+
+Every cursor rule must follow this exact metadata and content structure:
+
+````markdown
+---
+description: Short description of the rule's purpose
+globs: optional/path/pattern/**/*
+alwaysApply: false
+---
+# Rule Title
+
+Main content explaining the rule with markdown formatting.
+
+1. Step-by-step instructions
+2. Code examples
+3. Guidelines
+
+Example:
+```tsx
+// ✅ Good: React functional component with TypeScript and Tailwind
+const baseClass = 'rounded-full px-7 py-3.5 inline-flex justify-center items-center gap-2 text-neutral bg-primary transition-all'
+const defaultVariantClass = ''
+const outlineVariantClass = 'border-1.5 bg-transparent border-primary text-primary'
+
+const variants = {
+ variant: {
+   default: cn(defaultVariantClass, 'hover:bg-primary-40 active:bg-primary'),
+   outline: cn(outlineVariantClass, 'hover:bg-primary-10'),
+ },
+}
+
+const buttonVariants = cva(baseClass, {
+ variants,
+ defaultVariants: { variant: 'default' },
+})
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+ VariantProps<typeof buttonVariants> {
+ asChild?: boolean
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+ ({ className, variant, asChild = false, ...props }, ref) => {
+   const Comp = asChild ? Slot : 'button'
+   return <Comp className={cn(buttonVariants({ variant, className }))} ref={ref} {...props} />
+ }
+)
+
+// ❌ Bad: Missing TypeScript interface and using inline styles
+export const Button = ({ variant, children, onClick }) => {
+  return (
+    <button style={{color: 'red'}} onClick={onClick}>
+      {children}
+    </button>
+  )
+}
+```
+````
+
+## File Organization
+
+### Required Location
+
+All cursor rule files **must** be placed in:
+
+<path_to_rules>PROJECT_ROOT/.cursor/rules/</path_to_rules>
+
+### Directory Structure
+
+<directory_structure>
+PROJECT_ROOT/
+├── .cursor/
+│   └── rules/
+│       ├── your-rule-name.mdc
+│       ├── another-rule.mdc
+│       └── cursor-rules.mdc
+└── ...
+</directory_structure>
+
+### Naming Conventions
+
+- Use **kebab-case** for all rule filenames
+- Always use **.mdc** extension
+- Make names **descriptive** of the rule's purpose
+- Examples suitable for React project:
+  - `react-components.mdc` - Component patterns and conventions
+  - `tailwind-styling.mdc` - Tailwind CSS 4 styling guidelines
+  - `shadcn-components.mdc` - Shadcn component usage and customization
+  - `typescript-react.mdc` - TypeScript patterns in React
+  - `atomic-design.mdc` - Atomic design structure for components
+  - `i18n-implementation.mdc` - Internationalization patterns with react-i18next
+
+## Content Guidelines
+
+### Writing Effective Rules
+
+1. **Be specific and actionable** - Provide clear instructions
+2. **Include code examples** - Show both good and bad practices
+3. **Reference existing files** - Use `@filename.ext` format
+4. **Keep it focused** - One rule per concern/pattern
+5. **Add context** - Explain why the rule exists
+
+### Code Examples Format for React + Tailwind CSS 4
+
+```tsx
+// ✅ Good: React component with Tailwind CSS 4 and proper TypeScript
+interface CardProps {
+  title: string
+  description?: string
+  variant?: 'default' | 'outlined'
+  className?: string
+}
+
+export const Card: React.FC<CardProps> = ({
+  title,
+  description,
+  variant = 'default',
+  className = ''
+}) => {
+  return (
+    <div className={cn(
+      'rounded-lg border bg-card text-card-foreground shadow-sm',
+      variant === 'outlined' && 'border-2',
+      className
+    )}>
+      <div className="p-6">
+        <h3 className="text-2xl font-semibold leading-none tracking-tight">{title}</h3>
+        {description && (
+          <p className="text-sm text-muted-foreground mt-2">{description}</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ❌ Bad: Inline styles, no TypeScript, unclear structure
+export const Card = ({ title, description }) => {
+  return (
+    <div style={{ border: '1px solid gray', padding: '20px' }} className="color-[#1a1a1a]">
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  )
+}
+```
+
+### File References
+
+When referencing project files in rules, use this pattern to mention other files:
+
+```markdown
+[file.tsx](/path/to/file.tsx)
+```
+
+## Forbidden Locations
+
+**Never** place rule files in:
+- Project root directory
+- Any subdirectory outside `.cursor/rules/`
+- Component directories
+- Source code folders
+- Documentation folders
+
+## Rule Categories for React Project
+
+Organize rules by purpose, specific to React + Tailwind CSS 4 + Shadcn:
+
+### Frontend Framework
+- **React Components**: `react-components.mdc`, `atomic-design.mdc`, `component-lifecycle.mdc`
+- **TypeScript React**: `typescript-react.mdc`, `react-hooks.mdc`, `props-interfaces.mdc`
+
+### Styling & Design System
+- **Tailwind CSS**: `tailwind-styling.mdc`, `responsive-design.mdc`, `dark-mode.mdc`
+- **Shadcn Components**: `shadcn-components.mdc`, `ui-library.mdc`, `theme-customization.mdc`
+
+### Architecture & Patterns
+- **Project Structure**: `folder-structure.mdc`, `import-conventions.mdc`
+- **State Management**: `redux-patterns.mdc`, `rtk-query.mdc`
+- **Routing**: `react-router.mdc`, `navigation-patterns.mdc`
+
+### Development & Tools
+- **Build Tools**: `vite-config.mdc`, `build-optimization.mdc`
+- **Testing**: `react-testing.mdc`, `storybook-patterns.mdc`
+- **Linting**: `eslint-react.mdc`, `prettier-config.mdc`
+
+### Localization & Accessibility
+- **Internationalization**: `i18n-implementation.mdc`, `localization-patterns.mdc`
+- **Accessibility**: `a11y-patterns.mdc`, `semantic-html.mdc`
+
+### Meta Rules
+- **Management**: `cursor-rules.mdc`, `self-improve.mdc`
+- **Documentation**: `readme-format.mdc`, `code-comments.mdc`
+
+## Best Practices for React Project
+
+### Rule Creation Checklist
+- [ ] File placed in `.cursor/rules/` directory
+- [ ] Filename uses kebab-case with `.mdc` extension
+- [ ] Includes proper metadata section
+- [ ] Contains clear title and sections
+- [ ] Provides both good and bad examples with React/TypeScript
+- [ ] References relevant project files (main.css, components, utils.ts, etc.)
+- [ ] Follows consistent formatting
+- [ ] Uses Tailwind CSS classes instead of inline styles in examples
+- [ ] Includes TypeScript interfaces and proper typing
+- [ ] Compatible with Shadcn component patterns
+
+### React-Specific Guidelines
+- **Component Examples**: Always use functional components with hooks
+- **TypeScript Typing**: Define interfaces for all props
+- **Tailwind Usage**: Prefer utility classes, avoid custom CSS
+- **Shadcn Integration**: Use `cn()` helper for conditional styling
+- **Atomic Design**: Follow atoms/molecules/organisms structure
+- **i18n Support**: Include internationalization in examples when relevant
+
+### Maintenance for React Codebase
+- **Review regularly** - Keep rules updated with React/Tailwind changes
+- **Update examples** - Ensure code samples reflect current component patterns
+- **Cross-reference** - Link related rules (React + Tailwind + Shadcn)
+- **Document changes** - Update rules when component patterns evolve
+- **Monitor dependencies** - Update when Tailwind CSS 4 or Shadcn has updates
+- **Test compatibility** - Ensure examples work with current project setup

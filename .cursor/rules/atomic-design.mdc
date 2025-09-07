@@ -1,35 +1,40 @@
 ---
-description:
-globs:
+description: Atomic design structure for components
+globs: *.tsx
 alwaysApply: false
 ---
 # Atomic Design Structure
 
 ## Component Organization
 
-Follow strict atomic design hierarchy:
+Follow strict atomic design hierarchy with modern React and Tailwind CSS 4 patterns:
 
 ### Atoms (`src/components/atoms/`)
-- Basic building blocks (Button, Logo, Input, etc.)
-- Components with single responsibility, including base components from shadcn-ui
+- Basic building blocks (Button, Input, Label, etc.)
+- Components with single responsibility, including customized Shadcn/ui components
 - No dependencies on other components except utilities
-- Examples: [Button.tsx](mdc:src/components/atoms/Button.tsx)
+- Always use **PascalCase** naming (e.g., `Button.tsx` not `button.tsx`)
+- Examples: [Button.tsx](/src/components/atoms/Button.tsx)
 
 #### Atom Icons
-- SVG icons should be stored as components in `src/components/atoms/icons`
-- Examples: [CaretCircleRight.tsx](mdc:src/components/atoms/icons/CaretCircleRight.tsx)
+- SVG icons should be stored as React components in `src/components/atoms/icons/`
+- Use **PascalCase** naming for icon components
+- Examples: [CaretCircleRight.tsx](/src/components/atoms/icons/CaretCircleRight.tsx)
 
 ### Molecules (`src/components/molecules/`)
-- Combinations of atoms
-- Reusable UI patterns
+- Combinations of atoms forming meaningful UI patterns
+- Form groups, card headers, navigation items, etc.
+- Can import and compose multiple atoms
 
 ### Organisms (`src/components/organisms/`)
 - Complex components combining molecules and atoms
-- Complete sections of UI
+- Complete sections of UI (headers, forms, data tables, etc.)
+- Business logic and state management
 
 ### Templates (`src/components/templates/`)
-- Page-level components
-- Layout definitions
+- Page-level layout components
+- Define page structure and content areas
+- Composition of organisms, molecules, and atoms
 
 ## Rules
 
@@ -43,11 +48,11 @@ Follow strict atomic design hierarchy:
 7. Use descriptive component names that reflect their purpose
 
 ### Atoms Specific Rules
-8. **Single Responsibility**: Each atom does one thing only
-9. **forwardRef**: Always use React.forwardRef for DOM elements
-10. **displayName**: Set displayName for better debugging
-11. **CVA Variants**: Use class-variance-authority for styling variants
-12. **Tailwind CSS**: Use Tailwind classes, define custom ones in main.css
-13. **State Management**: Include hover, active, focus states when appropriate
-14. **Accessibility**: Support disabled state and proper ARIA attributes
-15. **asChild Pattern**: Include asChild prop for composition when needed
+1. **Single Responsibility**: Each atom does one thing only
+2. **forwardRef**: Always use React.forwardRef for DOM elements
+3. **displayName**: Set displayName for better debugging
+4. **CVA Variants**: Use class-variance-authority for styling variants
+5. **Tailwind CSS**: Use Tailwind classes, define custom ones in main.css
+6. **State Management**: Include hover, active, focus states when appropriate
+7. **Accessibility**: Support disabled state and proper ARIA attributes
+8. **asChild Pattern**: Include asChild prop for composition when needed

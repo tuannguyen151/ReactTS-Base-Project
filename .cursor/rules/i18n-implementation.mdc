@@ -1,5 +1,5 @@
 ---
-description:
+description: This rule provides comprehensive guidelines for implementing internationalization (i18n) in React applications using react-i18next
 globs:
 alwaysApply: false
 ---
@@ -9,35 +9,39 @@ alwaysApply: false
 
 ### i18n Configuration
 
-The i18n setup is configured in [i18n.tsx](mdc:src/locales/i18n.tsx):
-- Default language: English (`en`)
-- Available languages: English, Korean, Japanese
-- Translation files: [kr.json](mdc:src/locales/kr.json), [en.json](mdc:src/locales/en.json), [ja.json](mdc:src/locales/ja.json)
-- Already imported in [main.tsx](mdc:src/main.tsx)
+The i18n setup is configured in [i18n.tsx](/src/locales/i18n.tsx):
+- Primary language: Vietnamese (`vi`) - Default language for Vietnamese users
+- Fallback language: English (`en`) - Global standard fallback
+- Available languages: Vietnamese, English, Korean, Japanese
+- Translation files: [vi.json](/src/locales/vi.json), [en.json](/src/locales/en.json), [kr.json](/src/locales/kr.json), [ja.json](/src/locales/ja.json)
 
 ## Translation File Structure
 
-### Organize translations by feature/section in [kr.json](mdc:src/locales/kr.json):
+### Organize translations by feature/section in [vi.json](/src/locales/vi.json):
 
 ```json
 {
   "common": {
-    "logo": "LOGO"
-  },
-  "navigation": {
-    "features": "기능",
-    "reviews": "고객 후기",
-    "pricing": "가격 안내"
+    "logo": "LOGO",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "loading": "Đang tải..."
   },
   "auth": {
-    "login": "로그인",
-    "getStartedFree": "무료로 시작하기"
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "register": "Đăng ký",
+    "forgotPassword": "Quên mật khẩu",
+    "email": "Email",
+    "password": "Mật khẩu"
   },
-  "hero": {
-    "title": "학생들의 잃어버린 등불을 밝혀주세요",
-    "description": "...",
-    "ctaPrimary": "무료로 시작하기",
-    "ctaSecondary": "기능 살펴보기"
+  "errorMessages": {
+    "required": "{{field}} là bắt buộc",
+    "email": "Email không hợp lệ",
+    "minLength": "{{field}} phải có ít nhất {{min}} ký tự",
+    "maxLength": "{{field}} không được vượt quá {{max}} ký tự"
   }
 }
 ```
@@ -46,122 +50,94 @@ The i18n setup is configured in [i18n.tsx](mdc:src/locales/i18n.tsx):
 
 - Use nested objects for logical grouping
 - Use camelCase for keys
-- Prefix by component type: `common.*`, `navigation.*`, `auth.*`, `hero.*`
 - Use descriptive names: `ctaPrimary`, `ctaSecondary` instead of `button1`, `button2`
+- Follow global standards:
+  - `common.*` for shared UI elements
+  - `navigation.*` for menu/routing items
+  - `auth.*` for authentication flows
+  - `errorMessages.*` for validation and error handling
+  - Feature-specific namespaces for complex modules
 
-## Component Implementation Patterns
+## Component Usage
 
 ### Basic Pattern
 
 ```tsx
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-const ComponentName = () => {
+const MyComponent = () => {
   const { t } = useTranslation()
 
   return (
     <div>
-      {t('section.key')}
+      <button>{t('common.save')}</button>
     </div>
   )
 }
 ```
 
-### Static Data with Translations
-
-Reference: [NavigationMenu.tsx](mdc:src/components/molecules/NavigationMenu.tsx)
+### With Interpolation
 
 ```tsx
-// ✅ Preferred: Call t() in data definition
-const navigationItems = [
-  { label: t('navigation.features'), href: '/features' },
-  { label: t('navigation.reviews'), href: '/reviews' },
-  { label: t('navigation.pricing'), href: '/pricing' },
-]
+const FormWithError = ({ field }) => {
+  const { t } = useTranslation()
 
-// Then use directly in render
-{navigationItems.map(item => (
-  <a href={item.href}>{item.label}</a>
-))}
-```
-
-### Complex Text with Line Breaks
-
-Reference: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
-
-```tsx
-// For Korean text that may need word breaking
-<h1 className="break-all">
-  {t('hero.title')}
-</h1>
-
-// For long descriptions
-<p>{t('hero.description')}</p>
-```
-
-### Nested Object Access
-
-```tsx
-// For nested translations
-{t('hero.animationPlaceholder.title')}
-{t('hero.animationPlaceholder.description')}
+  return (
+    <p className="text-red-500">
+      {t('errorMessages.required', { field })}
+    </p>
+  )
+}
 ```
 
 ## Typography Considerations
 
-### Korean Text Handling
+### Vietnamese Text Handling
 
-- Add `break-all` class for Korean text that might overflow
-- Korean text often needs more vertical space
-- Consider line-height adjustments for Korean characters
+- Use `break-words` class for Vietnamese text that might overflow (better than `break-all`)
+- Vietnamese text with diacritics may need more vertical space
+- Consider line-height adjustments for proper readability
 
 ```tsx
-<h1 className="break-all leading-tight">
+<h1 className="break-words leading-relaxed">
   {t('hero.title')}
 </h1>
+
+// For better Vietnamese typography
+<p className="font-sans leading-loose tracking-wide">
+  {t('content.description')}
+</p>
 ```
 
-## Component-Specific Patterns
-
-### Navigation Components
-
-Reference: [NavigationMenu.tsx](mdc:src/components/molecules/NavigationMenu.tsx)
-
-- Define navigation items inside component using translations
-- Keep href values static, translate only labels
-- Use consistent hover states with `hover:text-neutral-60`
-
-### Button Components
-
-Reference: [HeaderActions.tsx](mdc:src/components/molecules/HeaderActions.tsx)
-
-- Wrap button text directly with `t()`
-- Keep button styling separate from text content
-- Use descriptive keys: `auth.login`, `auth.getStartedFree`
-
-### Hero/Section Components
-
-Reference: [HeroSection.tsx](mdc:src/components/organisms/HeroSection.tsx)
-
-- Group related content: `hero.title`, `hero.description`, `hero.ctaPrimary`
-- Use nested objects for complex content: `hero.animationPlaceholder.title`
-- Consider responsive text sizing with breakpoints
-
 ## Best Practices
+
+### Global Standards for i18n Implementation
 
 1. **Always use useTranslation hook** in functional components
 2. **Group translations logically** by component/feature area
 3. **Use descriptive key names** that indicate purpose
-4. **Handle long Korean text** with appropriate CSS classes
+4. **Handle Vietnamese text** with appropriate CSS classes (`break-words`, `leading-relaxed`)
 5. **Keep static data** (URLs, IDs) separate from translatable content
 6. **Call t() early** in component for static arrays/objects
-7. **Test text overflow** especially for Korean content
+7. **Test text overflow** in both Vietnamese and English
 8. **Maintain consistency** in naming conventions across translation files
+
+### Language-Specific Considerations
+
+- **Vietnamese (Primary)**: Full Unicode support, proper diacritics handling
+- **English (Fallback)**: Global standard, shorter text lengths typically
+- **Additional Languages**: Optional support for regional markets
+
+### Error Handling and Fallbacks
+
+- Always provide English fallback for missing translations
+- Use interpolation for dynamic content: `{{field}}`, `{{count}}`
+- Handle pluralization properly for Vietnamese grammar rules
+- Test with missing translation keys to ensure fallback works
 
 ## Common Gotchas
 
 - Don't forget to import `useTranslation` from `'react-i18next'`
-- Korean text may overflow in fixed-width containers - use `break-all`
+- Vietnamese text may overflow in fixed-width containers - use `break-words`
 - Always define the `t` function with `const { t } = useTranslation()`
-- Test components with different language content lengths
+- Test components with different language content lengths (Vietnamese vs English)
