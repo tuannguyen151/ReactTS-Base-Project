@@ -1,85 +1,117 @@
 ---
-description: Styling guidelines for Tailwind CSS v4
+description: Styling guidelines for Tailwind CSS v4 with Shadcn theming approach
 globs:
 alwaysApply: false
 ---
-# Styling Guidelines
 
-## TailwindCSS v4 Custom Colors
+# Styling Guidelines - Tailwind CSS v4 with Shadcn
 
-### Color Usage Rules
+## Shadcn Variables Approach
 
-**❌ NEVER use hardcoded hex colors in className:**
+### Primary Rule: Use Shadcn Variables
 
-```tsx
-// Wrong
-<div className="text-[#1a1a1a] bg-[#ffffff]" />
-```
-
-**✅ ALWAYS use custom colors defined in [main.css](/src/assets/css/main.css):**
-
-```tsx
-// Correct
-<div className="text-dark bg-white" />
-```
-
-### Color Naming Convention
-
-Always use semantic color names based on actual color values, not context:
-
-**✅ Good naming:**
+**✅ ALWAYS customize shadcn variables directly in `:root`:**
 
 ```css
---color-black: #000000;
---color-white: #ffffff;
---color-gray-200: #ebebeb;
---color-gray-300: #d9d9d9;
---color-gray-400: #c5c5c5;
---color-gray-600: #3f3f46;
---color-gray-800: #1a1a1a;
---color-red-500: #ef4444;
---color-blue-600: #2563eb;
-```
-
-**❌ Bad naming:**
-
-```css
---color-pricing-bg: #ebebeb;  // Use --color-gray-200 instead
---color-button-text: #1a1a1a;  // Use --color-gray-800 instead
---color-primary-dark: #123456;  // Use actual color name like --color-blue-800
-```
-
-### Adding New Colors
-
-Add colors to [main.css](/src/assets/css/main.css) in the `@theme` section:
-
-```css
-@theme {
-  /* Use proper color naming */
-  --color-gray-100: #f3f4f6;
-  --color-blue-500: #3b82f6;
-  --color-red-400: #f87171;
+:root {
+  /* Customize existing shadcn variables for your theme */
+  --background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #95a5a6 100%);
+  --foreground: #ffffff;
+  --card: rgba(255, 255, 255, 0.15);
+  --card-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #2c3e50;
+  --border: rgba(255, 255, 255, 0.4);
+  --input: rgba(255, 255, 255, 0.4);
+  --muted-foreground: #dfe6e9;
+  --ring: rgba(255, 255, 255, 0.6);
 }
 ```
 
-### Available Custom Colors
+**❌ NEVER create custom CSS variables for theming:**
 
-Current defined colors in [main.css](/src/assets/css/main.css):
+```css
+/* Wrong - Don't create custom variables */
+--custom-glass-bg: rgba(255, 255, 255, 0.15);
+--custom-glass-text: #ffffff;
+--glass-button-bg: #ffffff;
+```
 
-- `black`: #000000
-- `white`: #ffffff
-- `gray-200`: #ebebeb
-- `gray-300`: #d9d9d9
-- `gray-400`: #c5c5c5
-- `gray-500`: #777777
-- `gray-600`: #3f3f46
-- `gray-800`: #1a1a1a
-- `header-text`: #1a1a1a
-- `header-border`: rgba(112, 115, 124, 0.22)
-- `logo-bg`: #d9d9d9
-- `hero-title`: #27272a
-- `hero-description`: #3f3f46
-- `hero-animation-bg`: #d9d9d9
+### Color Usage in Components
+
+**✅ Use shadcn semantic classes:**
+
+```tsx
+// Correct - Use shadcn semantic classes
+<div className="bg-card text-card-foreground border-border" />
+<button className="bg-primary text-primary-foreground hover:bg-primary/90" />
+<input className="bg-input border-border text-foreground placeholder:text-muted-foreground" />
+```
+
+**❌ Don't use hardcoded colors or custom variables:**
+
+```tsx
+// Wrong - Hardcoded colors
+<div className="text-[#ffffff] bg-[rgba(255,255,255,0.15)]" />
+
+// Wrong - Custom variables
+<div className="text-[var(--custom-glass-text)] bg-[var(--custom-glass-bg)]" />
+```
+
+## Available Shadcn Variables
+
+### Layout & Background
+- `bg-background` - Main background
+- `text-foreground` - Main text color
+
+### Card Components
+- `bg-card` - Card background
+- `text-card-foreground` - Card text
+- `border-border` - Border color
+
+### Interactive Elements
+- `bg-primary` - Primary button/action background
+- `text-primary-foreground` - Primary button text
+- `bg-secondary` - Secondary elements
+- `text-secondary-foreground` - Secondary text
+
+### Form Elements
+- `bg-input` - Input background
+- `border-input` - Input borders (falls back to border)
+- `placeholder:text-muted-foreground` - Placeholder text
+
+### States & Effects
+- `ring-ring` - Focus rings
+- `bg-accent` - Hover/accent states
+- `text-muted-foreground` - Muted text
+
+## Theme Customization Process
+
+1. **Identify the UI element type** (card, button, input, etc.)
+2. **Find the corresponding shadcn variable** (--card, --primary, --input, etc.)
+3. **Customize the variable value in `:root`**
+4. **Use the semantic Tailwind class** (`bg-card`, `bg-primary`, etc.)
+
+### Example: Glassmorphism Theme
+
+```css
+:root {
+  /* Glassmorphism theme using shadcn variables */
+  --background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #95a5a6 100%);
+  --card: rgba(255, 255, 255, 0.15);
+  --primary: #ffffff;
+  --input: rgba(255, 255, 255, 0.4);
+  --border: rgba(255, 255, 255, 0.4);
+}
+```
+
+```tsx
+// Components automatically inherit glassmorphism styling
+<Card className="backdrop-blur-[15px]">  {/* Uses --card variable */}
+  <Button>Submit</Button>  {/* Uses --primary variable */}
+  <Input />  {/* Uses --input and --border variables */}
+</Card>
+```
 
 ## Responsive Design Rules
 
@@ -94,7 +126,6 @@ Current defined colors in [main.css](/src/assets/css/main.css):
    ```
 
 2. **Use responsive breakpoints:**
-
    - `sm:` - 640px and up
    - `md:` - 768px and up
    - `lg:` - 1024px and up
@@ -106,15 +137,6 @@ Current defined colors in [main.css](/src/assets/css/main.css):
    <div className="container mx-auto px-4 md:px-6 lg:px-8" />
    ```
 
-## Height Calculations
-
-When creating full-height sections below fixed headers:
-
-```tsx
-// Account for header height (4rem)
-<section className="h-[calc(100vh-4rem)]" />
-```
-
 ## TailwindCSS Best Practices
 
 ### Class Ordering
@@ -124,26 +146,26 @@ Always follow consistent class ordering for maintainability:
 1. Layout (position, display, flex, grid)
 2. Sizing (width, height, padding, margin)
 3. Typography (font, text)
-4. Colors (background, text, border)
+4. Colors (background, text, border) - **Use shadcn classes**
 5. Effects (shadow, opacity, transform)
 6. States (hover, focus, active)
 
 ```tsx
-// Good
-<div className="relative flex w-full h-24 px-4 py-2 text-lg font-bold text-gray-800 bg-white rounded shadow hover:bg-gray-100" />
+// Good - Using shadcn semantic classes
+<div className="relative flex w-full h-24 px-4 py-2 text-lg font-bold text-card-foreground bg-card rounded shadow hover:bg-card/90" />
 
-// Avoid random ordering
-<div className="text-gray-800 px-4 relative bg-white w-full hover:bg-gray-100 flex rounded py-2 h-24 shadow font-bold text-lg" />
+// Avoid random ordering and hardcoded colors
+<div className="text-[#1a1a1a] px-4 relative bg-[#ffffff] w-full hover:bg-[#f5f5f5] flex rounded py-2 h-24 shadow font-bold text-lg" />
 ```
 
-### Use Single Quotes
+### Single Quotes Convention
 
 Always use single quotes for className attributes:
 
 ```tsx
 // Good
-<div className='flex items-center' />
+<div className='bg-card text-card-foreground' />
 
 // Avoid
-<div className="flex items-center" />
+<div className="bg-card text-card-foreground" />
 ```

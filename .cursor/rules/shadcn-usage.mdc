@@ -1,0 +1,69 @@
+---
+description: Shadcn components usage instead of custom implementations
+alwaysApply: false
+---
+# Shadcn Components Usage Rules
+
+## CRITICAL: Always Use Shadcn CLI
+
+**❌ NEVER create custom UI components when Shadcn equivalents exist**
+
+**✅ ALWAYS use Shadcn CLI:**
+
+```bash
+npx shadcn@latest add input card label checkbox --yes
+```
+
+## Naming Convention
+
+**✅ Rename to PascalCase after installation:**
+
+```bash
+mv input.tsx Input.tsx && mv card.tsx Card.tsx
+```
+
+## Common Components Available
+
+Check these before creating any UI component:
+
+**Form**: input, label, checkbox, select, textarea, switch, radio-group
+**Layout**: card, separator, aspect-ratio
+**Navigation**: button, dropdown-menu, navigation-menu
+**Feedback**: alert, toast, dialog, popover
+
+## Import Pattern
+
+**✅ Import from atoms:**
+```typescript
+import { Button } from '@/components/atoms/Button'
+```
+
+**❌ Don't create custom:**
+```typescript
+const Button = () => { /* custom */ } // Wrong
+```
+
+## Customization
+
+**✅ Use CSS variables:**
+```css
+:root {
+  --card: rgba(255, 255, 255, 0.15);
+}
+```
+
+**❌ Don't wrap unnecessarily:**
+```typescript
+// Wrong
+const CustomInput = (props) => <Input className="custom" {...props} />
+// Right
+<Input className="custom" {...props} />
+```
+
+## Summary
+
+1. Check Shadcn first
+2. Use CLI installation
+3. Rename to PascalCase
+4. Import from @/components/atoms
+5. Customize via CSS variables

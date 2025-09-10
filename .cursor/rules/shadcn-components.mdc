@@ -1,7 +1,47 @@
 ---
 description: Defines UI and styling conventions using Tailwind CSS and Shadcn components, emphasizing utility-first styling and reusable UI elements.
 ---
-- Use Tailwind CSS for utility-first styling approach.
-- Leverage Shadcn components for pre-built, customizable UI elements.
-- Import Shadcn components from [Atoms](/src/components/atoms).
-- Organize Tailwind classes using the `cn()` utility from [Utils](/src/lib/utils.ts).
+
+# Shadcn Components Best Practices
+
+## Shadcn Variables Customization
+
+**✅ ALWAYS customize shadcn variables directly in `:root`:**
+
+```css
+:root {
+  /* Customize existing shadcn variables */
+  --card: rgba(255, 255, 255, 0.15);
+  --card-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #2c3e50;
+  --border: rgba(255, 255, 255, 0.4);
+  --input: rgba(255, 255, 255, 0.4);
+  --muted-foreground: #dfe6e9;
+  --ring: rgba(255, 255, 255, 0.6);
+}
+```
+
+**❌ NEVER create custom CSS variables:**
+
+```css
+/* Wrong */
+--custom-glass-bg: rgba(255, 255, 255, 0.15);
+--custom-glass-text: #ffffff;
+```
+
+## Component Import Guidelines
+
+- Import Shadcn components from [Atoms](/src/components/atoms)
+- Use PascalCase naming for all components
+- Export both component and variants for reusability
+- Always use TypeScript interfaces extending React component props
+
+## Best Practices
+
+1. **Use `cn()` utility** from [Utils](/src/lib/utils.ts) for className composition
+2. **Always use forwardRef** for DOM element components
+3. **Set displayName** for better debugging
+4. **Support asChild pattern** for composition when appropriate
+5. **Include proper TypeScript types** with VariantProps
+6. **Follow accessibility guidelines** with proper ARIA attributes

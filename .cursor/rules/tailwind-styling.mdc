@@ -1,78 +1,206 @@
 ---
-description: Tailwind CSS and UI component best practices for modern web applications
-globs: *.tsx,src/assets/css/main.css
+description: Tailwind CSS v4 and UI component best practices with Shadcn theming approach
+alwaysApply: false
 ---
+# Tailwind CSS v4 Best Practices with Shadcn
 
-# Tailwind CSS Best Practices
+## Tailwind CSS v4 Setup
 
-## Project Setup
-- Use proper Tailwind configuration
-- Configure theme extension properly
-- Set up proper purge configuration
-- Use proper plugin integration
-- Configure custom spacing and breakpoints
-- Set up proper color palette
+### CSS-first Configuration
+
+**✅ Use `@theme inline` for theming:**
+
+```css
+/* src/assets/css/main.css */
+@import 'tailwindcss';
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  /* Map all Tailwind utilities to CSS variables */
+}
+```
+
+**❌ Don't create `tailwind.config.js` for v4:**
+
+```js
+// Wrong - Not needed in Tailwind v4
+module.exports = {
+  theme: {
+    extend: {
+      colors: { /* custom colors */ }
+    }
+  }
+}
+```
+
+### PostCSS Configuration
+
+**Use dedicated Tailwind v4 PostCSS plugin:**
+
+```js
+// postcss.config.mjs
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+## Theming Approach
+
+### Customize Shadcn Variables in :root
+
+**✅ Theme customization through shadcn variables:**
+
+```css
+:root {
+  --radius: 0.625rem;
+
+  /* Your custom theme values */
+  --background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #95a5a6 100%);
+  --foreground: #ffffff;
+  --card: rgba(255, 255, 255, 0.15);
+  --card-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #2c3e50;
+  --border: rgba(255, 255, 255, 0.4);
+  --input: rgba(255, 255, 255, 0.4);
+  --muted-foreground: #dfe6e9;
+  --ring: rgba(255, 255, 255, 0.6);
+}
+```
+
+**❌ Don't create separate theme classes:**
+
+```css
+/* Wrong - Creates additional complexity */
+.glassmorphism-theme {
+  --custom-bg: rgba(255, 255, 255, 0.15);
+  --custom-text: #ffffff;
+}
+```
 
 ## Component Styling
-- Use utility classes over custom CSS
-- Group related utilities with @apply when needed
-- Use proper responsive design utilities
-- Implement dark mode properly
-- Use proper state variants
-- Keep component styles consistent
 
-## Layout
-- Use Flexbox and Grid utilities effectively
-- Implement proper spacing system
-- Use container queries when needed
-- Implement proper responsive breakpoints
-- Use proper padding and margin utilities
-- Implement proper alignment utilities
+### Use Shadcn Semantic Classes
 
-## Typography
-- Use proper font size utilities
-- Implement proper line height
-- Use proper font weight utilities
-- Configure custom fonts properly
-- Use proper text alignment
-- Implement proper text decoration
+**✅ Always use semantic Tailwind classes:**
 
-## Colors
-- Use semantic color naming
-- Implement proper color contrast
-- Use opacity utilities effectively
-- Configure custom colors properly
-- Use proper gradient utilities
-- Implement proper hover states
+```tsx
+// Correct - Semantic and themeable
+<div className='bg-card text-card-foreground border-border rounded-lg' />
+<button className='bg-primary text-primary-foreground hover:bg-primary/90' />
+<input className='bg-input border-input text-foreground placeholder:text-muted-foreground' />
+```
 
-## Components
-- Use shadcn/ui components when available
-- Extend components properly
-- Keep component variants consistent
-- Implement proper animations
-- Use proper transition utilities
-- Keep accessibility in mind
+**❌ Avoid hardcoded values or custom properties:**
 
-## Responsive Design
-- Use mobile-first approach
-- Implement proper breakpoints
-- Use container queries effectively
-- Handle different screen sizes properly
-- Implement proper responsive typography
-- Use proper responsive spacing
+```tsx
+// Wrong - Hardcoded colors
+<div className='bg-[rgba(255,255,255,0.15)] text-[#ffffff]' />
 
-## Performance
-- Use proper purge configuration
-- Minimize custom CSS
-- Use proper caching strategies
-- Implement proper code splitting
-- Optimize for production
-- Monitor bundle size
+// Wrong - Custom variables
+<div className='bg-[var(--custom-glass-bg)] text-[var(--custom-text)]' />
+```
 
-## Best Practices
-- Follow naming conventions
-- Keep styles organized
-- Use proper documentation
-- Implement proper testing
-- Follow accessibility guidelines
-- Use proper version control
+## Layout & Components
+
+### Background Styling
+
+**✅ Use `bg-background` with custom pattern:**
+
+```tsx
+// Use shadcn background class
+<div className='bg-background min-h-screen'>
+  {/* Your content */}
+</div>
+```
+
+```css
+/* Add patterns/effects in @layer components */
+@layer components {
+  .bg-background {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg-background::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,...");
+    opacity: 0.6;
+  }
+}
+```
+
+### Responsive Design
+
+**Use mobile-first approach with consistent breakpoints:**
+
+```tsx
+<div className='w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl'>
+  <div className='p-4 md:p-6 lg:p-8'>
+    <h1 className='text-lg md:text-xl lg:text-2xl'>
+      Title
+    </h1>
+  </div>
+</div>
+```
+
+## Performance & Organization
+
+### Minimize Custom CSS
+
+**✅ Use Tailwind utilities and shadcn classes:**
+- Leverage built-in utility classes
+- Customize through CSS variables, not new classes
+- Use CVA for component variants
+
+**❌ Avoid creating many custom CSS classes:**
+```css
+/* Wrong - Too many custom classes */
+.custom-button { /* ... */ }
+.custom-input { /* ... */ }
+.custom-card { /* ... */ }
+```
+
+### File Organization
+
+**Structure CSS following v4 conventions:**
+
+```css
+/* main.css structure */
+@import 'tailwindcss';
+
+@theme inline {
+  /* Theme mappings */
+}
+
+:root {
+  /* Shadcn variable customizations */
+}
+
+.dark {
+  /* Dark mode overrides */
+}
+
+@layer components {
+  /* Minimal component-specific utilities */
+}
+```
+
+## Accessibility & Best Practices
+
+1. **Use semantic HTML with Tailwind classes**
+2. **Ensure proper color contrast** with shadcn variables
+3. **Test with screen readers** and keyboard navigation
+4. **Use `focus-visible:` utilities** for keyboard focus styling
+5. **Implement `hover:` and `active:` states** consistently
+6. **Follow WCAG guidelines** for interactive elements

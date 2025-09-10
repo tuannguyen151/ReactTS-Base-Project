@@ -1,6 +1,5 @@
 ---
 description: Atomic design structure for components
-globs: *.tsx
 alwaysApply: false
 ---
 # Atomic Design Structure
