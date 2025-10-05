@@ -1,36 +1,31 @@
+import { useRef } from 'react'
+
 import { Button } from '@/components/atoms/Button'
-import CaretCircleRight from '@/components/atoms/icons/CaretCircleRight'
+import { Modal, type ModalRef } from '@/components/atoms/Modal'
 
-const Home = () => (
-  <div className='flex gap-4'>
-    <div>
-      <Button>DEFAULT</Button>
+const Home = () => {
+  console.log('Parent')
+  const modalRef = useRef<ModalRef>(null)
+
+  return (
+    <div className='size-full'>
+      <Modal
+        ref={modalRef}
+        title='Modal Title'
+        onBeforeClose={() => {
+          // timeout 10s
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(true)
+            }, 10000)
+          })
+        }}
+      >
+        <div>Modal Content</div>
+      </Modal>
+      <Button onClick={() => modalRef.current?.open()}>Open Modal</Button>
     </div>
-
-    <div>
-      <Button variant='disabled'>DISABLED</Button>
-    </div>
-
-    <div>
-      <Button variant='roundedFull'>
-        <CaretCircleRight />
-      </Button>
-    </div>
-
-    <div>
-      <Button>
-        <CaretCircleRight />
-
-        <span>BUTTON WITH ICON</span>
-
-        <CaretCircleRight />
-      </Button>
-    </div>
-
-    <div>
-      <Button variant='outline'>OUTLINE</Button>
-    </div>
-  </div>
-)
+  )
+}
 
 export default Home
